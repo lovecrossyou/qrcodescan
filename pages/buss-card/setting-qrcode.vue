@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="qrimg">
 			<tki-qrcode v-if="ifShow" ref="qrcode" :val="val" :size="size" :unit="unit" :background="backgroundColor"
-			 :foreground="foregroundColor" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
+			 :foreground="foregroundColor" :pdground="foregroundColor" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
 			 :loadMake="loadMake" :usingComponents="true" @result="qrR" />
 		</view>
 		<view class="uni-padding-wrap uni-common-mt">
@@ -13,9 +13,9 @@
 		</view>
 		<view class="uni-padding-wrap">
 			<view class="btns">
-				<view class="primary" @tap="togglePopup('bottom-share',false)">前景色</view>
+				<view class="primary" @tap="togglePopup('bottom-share',1)">前景色</view>
 				<view class="primary" @tap="selectIcon">选择二维码图标</view>
-				<view class="primary" @tap="togglePopup('bottom-share',true)">背景色</view>
+				<view class="primary" @tap="togglePopup('bottom-share',2)">背景色</view>
 				<view class="primary_bule" @tap="saveQrcode">保存到手机</view>
 				<view class="primary" @tap="shareQrcode">分享给好友</view>
 			</view>
@@ -67,7 +67,7 @@
 		},
 		computed: {
 			bottom_title() {
-				return this.isChangeBgColor ? '背景色' : '前景色';
+				return this.isChangeBgColor===2 ? '背景色' : '前景色';
 			},
 			backgroundColor() {
 				return this.bottomData[this.backgroundIndex];
@@ -78,8 +78,7 @@
 		},
 		methods: {
 			changeColor(index) {
-				console.log('index ', index);
-				if (this.isChangeBgColor) {
+				if (this.isChangeBgColor===2) {
 					this.backgroundIndex = index;
 				} else {
 					this.foregroundIndex = index;
