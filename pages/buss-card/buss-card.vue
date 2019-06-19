@@ -5,22 +5,22 @@
 			<cmd-transition name="fade-up">
 				<view class="modify">
 					<view class="modify-phone">
-						<cmd-input v-model="mobile.name" type="number" maxlength="11" placeholder="姓名"></cmd-input>
+						<cmd-input v-model="vcard.name" type="number" maxlength="11" placeholder="姓名"></cmd-input>
 					</view>
 					<view class="modify-code">
-						<cmd-input v-model="mobile.phone" type="number" maxlength="6" placeholder="联系电话"></cmd-input>
+						<cmd-input v-model="vcard.phone" type="number" maxlength="11" placeholder="联系电话"></cmd-input>
 					</view>
 					<view class="modify-password">
-						<cmd-input v-model="mobile.addr" maxlength="26" placeholder="联系地址"></cmd-input>
+						<cmd-input v-model="vcard.addr" maxlength="26" placeholder="联系地址"></cmd-input>
 					</view>
 					<view class="modify-password">
-						<cmd-input v-model="mobile.company" maxlength="26" placeholder="公司名称"></cmd-input>
+						<cmd-input v-model="vcard.company" maxlength="26" placeholder="公司名称"></cmd-input>
 					</view>
 					<view class="modify-password">
-						<cmd-input v-model="mobile.work" maxlength="26" placeholder="职位"></cmd-input>
+						<cmd-input v-model="vcard.work" maxlength="26" placeholder="职位"></cmd-input>
 					</view>
 					<view class="modify-password">
-						<cmd-input v-model="mobile.email" maxlength="26" placeholder="邮件地址"></cmd-input>
+						<cmd-input v-model="vcard.email" maxlength="26" placeholder="邮件地址"></cmd-input>
 					</view>
 					<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
 					 @click="fnModify">生成二维码</button>
@@ -37,7 +37,9 @@
 	import cmdInput from "@/components/cmd-input/cmd-input.vue"
 	import {
 		mapMutations
-	} from 'vuex'
+	} from 'vuex';
+	
+	import qrcode from "@/util/qrcode.js"
 	export default {
 		components: {
 			cmdNavBar,
@@ -48,11 +50,13 @@
 
 		data() {
 			return {
-				mobile: {
+				vcard: {
 					phone: '',
-					code: '',
-					passwordOne: '',
-					passwordTwo: ''
+					name: '',
+					addr: '',
+					work: '',
+					email:'',
+					company:''
 				},
 				passwordReg: /^\w+$/,
 				phoneReg: /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/,
@@ -65,65 +69,18 @@
 			};
 		},
 
-		watch: {
-			/**
-			 * 监听表单数值
-			 */
-			mobile: {
-				handler(newValue) {
-					if (this.phoneReg.test(newValue.phone) && newValue.code.length == 6 && newValue.passwordOne.length >= 8 &&
-						newValue.passwordOne == newValue.passwordTwo) {
-						this.modifyMobile = true;
-					} else {
-						this.modifyMobile = false;
-					}
-				},
-				deep: true
-			}
-		},
-
 		methods: {
 			...mapMutations(['saveQRData']),
 			/**
 			 * 提交按钮点击执行
 			 */
 			fnModify() {
-				this.saveQRData(this.mobile.name);
+				const qrStr = qrcode.vcard(this.vcard);
+				
+				this.saveQRData(qrStr);
 				uni.navigateTo({
 					url: '/pages/buss-card/setting-qrcode'
 				});
-			},
-			/**
-			 * 获取验证码
-			 */
-			fnGetPhoneCode() {
-				if (this.phoneReg.test(this.mobile.phone)) {
-					uni.showToast({
-						title: "正在发送验证码",
-						icon: "loading",
-						success: () => {
-							// 成功后显示倒计时60s后可在点击
-							this.safety.state = true;
-							// 倒计时
-							this.safety.interval = setInterval(() => {
-								if (this.safety.time-- <= 0) {
-									this.safety.time = 60;
-									this.safety.state = false;
-									clearInterval(this.safety.interval);
-								}
-							}, 1000);
-							uni.showToast({
-								title: "发送成功",
-								icon: "success"
-							})
-						}
-					})
-				} else {
-					uni.showToast({
-						title: "手机号不正确",
-						icon: "none"
-					})
-				}
 			}
 		},
 
