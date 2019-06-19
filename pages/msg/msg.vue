@@ -18,6 +18,8 @@
 	import {
         mapMutations
     } from 'vuex'
+		import qrcode from "@/util/qrcode.js"
+
 	export default {
 		data() {
 			return {
@@ -29,7 +31,8 @@
 		methods: {
 			...mapMutations(['saveQRData']),
 			fnModify() {
-				this.saveQRData(this.phone+this.content);
+				const qrStr = qrcode.message(this.phone,this.content);
+				this.saveQRData(qrStr);				
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});

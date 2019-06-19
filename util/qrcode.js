@@ -9,13 +9,13 @@ const qrcode = {
 		return url;
 	},
 	phone: phone => {
-		return 'tel:' + phone + '';
+		return 'TEL:' + phone + '';
 	},
 	message: (phone, content) => {
-		return '{smsto:' + phone + ':' + content + '}';
+		return 'SMSTO:' + phone + ':' + content;
 	},
 	emal: email => {
-		return '{mailto:' + email + '}';
+		return 'MAILTO:' + email;
 	},
 	vcard: vcard => {
 		var a,
