@@ -23,7 +23,7 @@
 						<cmd-input v-model="mobile.email" maxlength="26" placeholder="邮件地址"></cmd-input>
 					</view>
 					<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
-					 @tap="fnModify">生成二维码</button>
+					 @click="fnModify">生成二维码</button>
 				</view>
 			</cmd-transition>
 		</cmd-page-body>
@@ -59,7 +59,7 @@
 					state: false,
 					interval: ''
 				},
-				modifyMobile: false
+				modifyMobile: true
 			};
 		},
 
