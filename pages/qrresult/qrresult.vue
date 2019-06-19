@@ -1,20 +1,35 @@
 <template>
 	<view class="main">
-		<view class="qrimg">
+		<text class="qrimg">
+			{{qrData}}
+		</text>
 
-		</view>
-
-		<view class="item">
+		<view class="item" @click="copy">
 			复制
-		</view>
-		
-		<view class="item">
-			保存到相册
 		</view>
 	</view>
 </template>
 
 <script>
+	export default {
+		data() {
+			return {
+				qrData: '13131313131313131311313131哈哈哈哈哈哈13131331'
+			}
+		},
+		methods: {
+			copy() {
+				uni.setClipboardData({
+					data: this.qrData,
+					success: function() {
+						uni.showToast({
+							title:"复制成功"
+						})
+					}
+				});
+			}
+		}
+	}
 </script>
 
 <style>
@@ -30,28 +45,36 @@
 	}
 
 	.qrimg {
-		width: 500upx;
-		height: 500upx;
-		background: gray;
+		width: 100%;
+		height: 702upx;
+		background: #FFFFFF;
+		border-radius: 16upx;
+		overflow: visible;
+		padding: 24upx;
+		box-sizing: border-box;
 	}
-	
-	.item{
+
+	.item {
 		height: 80upx;
 		line-height: 80upx;
 		text-align: center;
-		
-		color: #333333;
+
+		color: #FFFFFF;
 		font-size: 28upx;
 		margin-top: 20upx;
-		background: #FFFFFF;
 		width: 100%;
+
+
+		background: #0AC160;
+		border: 2upx solid rgba(5, 5, 5, 0.08);
+		border-radius: 16upx;
 	}
-	
-	.item_40{
+
+	.item_40 {
 		height: 80upx;
 		line-height: 80upx;
 		text-align: center;
-		
+
 		color: #333333;
 		font-size: 28upx;
 		margin-top: 20upx;
