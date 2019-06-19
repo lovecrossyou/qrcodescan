@@ -1,4 +1,7 @@
 const qrcode = {
+	wifi: wifi=>{
+		return 'WIFI:S:'+wifi.name+';T:WPA;P:'+wifi.password+';;'
+	},
 	url: url => {
 		if(url.indexOf('http')===-1){
 			return 'http://'+url;

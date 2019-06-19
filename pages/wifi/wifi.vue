@@ -1,11 +1,11 @@
 <template>
 	<view class="main">
 		<view class="uni-phone">
-			<textarea @blur="bindTextAreaBlur" auto-height maxlength:200 placeholder="无线账号" />
+			<textarea @blur="bindTextAreaName" auto-height maxlength:200 placeholder="无线账号" />
 			</view>
 		
 		<view class="uni-phone">
-			<textarea @blur="bindTextAreaBlur" auto-height maxlength:200 placeholder="无线Wi-Fi密码" type='number' />
+			<textarea @blur="bindTextAreaPwd" auto-height maxlength:200 placeholder="无线Wi-Fi密码" type='number' />
 		</view>
 		
 		<view class="type">
@@ -14,13 +14,13 @@
 		
 		
 		<view class="encrypt">
-			<view class="encrypt-item" :class="activeIndex===0? 'encrypt-item-active':''" @click="changeType(0)">
+			<view class="encrypt-item" :class="activeIndex===0? 'encrypt-item-active':''" @click="changeType(0,'WPA/WPA2')">
 				WPA/WPA2
 			</view>
-			<view class="encrypt-item" :class="activeIndex===1? 'encrypt-item-active':''" @click="changeType(1)">
+			<view class="encrypt-item" :class="activeIndex===1? 'encrypt-item-active':''" @click="changeType(1,'WEP')">
 				WEP
 			</view>
-			<view class="encrypt-item" :class="activeIndex===2? 'encrypt-item-active':''" @click="changeType(2)">
+			<view class="encrypt-item" :class="activeIndex===2? 'encrypt-item-active':''" @click="changeType(2,'')">
 				无加密
 			</view>
 		</view>
@@ -36,26 +36,39 @@
 	import {
         mapMutations
     } from 'vuex'
+		import qrcode from "@/util/qrcode.js"
+
 	export default {
 		data() {
 			return {
 				modifyMobile: true,
-				activeIndex:0
+				activeIndex:0,
+				wifi:{
+					name:'',
+					password:'',
+					type:'WPA/WPA2'
+				}
 			}
 		},
 		methods: {
-			changeType(index){
+			changeType(index,type){
 				this.activeIndex=index;
+				this.wifi.type = type;
 			},
 			...mapMutations(['saveQRData']),
 			fnModify() {
-				this.saveQRData(this.data);
+				const qrStr = qrcode.wifi(this.wifi);
+				
+				this.saveQRData(qrStr);
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});
 			},
-			bindTextAreaBlur: function (e) {
-				this.data = e.detail.value;
+			bindTextAreaName: function (e) {
+				this.wifi.name = e.detail.value;
+			},
+			bindTextAreaPwd: function (e) {
+				this.wifi.password = e.detail.value;
 			}
 		}
 	}
