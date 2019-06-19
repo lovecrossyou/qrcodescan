@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<view class="uni-textarea">
-			<textarea @blur="bindTextAreaBlur" auto-height @maxlength='200' placeholder="请输入电话号码或手机号码" />
+			<textarea @blur="bindTextAreaBlur" @maxlength='200' placeholder="请输入电话号码或手机号码" />
 			</view>
 			<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
 					 @tap="fnModify">生成二维码</button>
@@ -49,6 +49,10 @@
 	padding: 20upx;
 	box-sizing: border-box;
 }
+textarea{
+	height: 300upx;
+}
+
 
 .btn-modify {
 		margin-top: 100upx;

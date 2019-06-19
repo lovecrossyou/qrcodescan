@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<view class="uni-textarea">
-			<textarea @blur="bindTextAreaBlur" auto-height maxlength:200 placeholder="请输入内容" />
+			<textarea @blur="bindTextAreaBlur" maxlength:200 placeholder="请输入内容" />
 			</view>
 			<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
 					 @tap="fnModify">生成二维码</button>
@@ -11,14 +11,23 @@
 </template>
 
 <script>
+	import {
+		mapMutations
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				modifyMobile: true
+				modifyMobile: true,
+				data:''
 			}
 		},
 		methods: {
+			...mapMutations(['saveQRData']),
+			bindTextAreaBlur: function (e) {
+				this.data = e.detail.value;
+			},
 			fnModify() {
+				this.saveQRData(this.data);
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});
@@ -39,6 +48,10 @@
 	margin: 20upx;
 	padding: 20upx;
 	box-sizing: border-box;
+}
+
+textarea{
+	height: 300upx;
 }
 
 .btn-modify {

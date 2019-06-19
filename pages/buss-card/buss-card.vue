@@ -5,7 +5,7 @@
 			<cmd-transition name="fade-up">
 				<view class="modify">
 					<view class="modify-phone">
-						<cmd-input v-model="mobile.phone" type="number" maxlength="11" placeholder="姓名"></cmd-input>
+						<cmd-input v-model="mobile.name" type="number" maxlength="11" placeholder="姓名"></cmd-input>
 					</view>
 					<view class="modify-code">
 						<cmd-input v-model="mobile.phone" type="number" maxlength="6" placeholder="联系电话"></cmd-input>
@@ -35,7 +35,9 @@
 	import cmdPageBody from "@/components/cmd-page-body/cmd-page-body.vue"
 	import cmdTransition from "@/components/cmd-transition/cmd-transition.vue"
 	import cmdInput from "@/components/cmd-input/cmd-input.vue"
-
+	import {
+		mapMutations
+	} from 'vuex'
 	export default {
 		components: {
 			cmdNavBar,
@@ -81,13 +83,14 @@
 		},
 
 		methods: {
+			...mapMutations(['saveQRData']),
 			/**
 			 * 提交按钮点击执行
 			 */
 			fnModify() {
-				console.log('xx');
+				this.saveQRData(this.mobile.name);
 				uni.navigateTo({
-					url:'/pages/buss-card/setting-qrcode'
+					url: '/pages/buss-card/setting-qrcode'
 				});
 			},
 			/**

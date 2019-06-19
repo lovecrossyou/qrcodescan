@@ -1,8 +1,7 @@
 <template>
 	<view class="container">
 		<view class="qrimg">
-			<tki-qrcode v-if="ifShow" ref="qrcode" :val="val" :size="size" :unit="unit" :background="backgroundColor"
-			 :foreground="foregroundColor" :pdground="foregroundColor" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
+			<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="foregroundColor" :foreground="backgroundColor" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
 			 :loadMake="loadMake" :usingComponents="true" @result="qrR" />
 		</view>
 		<view class="uni-padding-wrap uni-common-mt">
@@ -46,30 +45,27 @@
 				ifShow: true,
 				size: 200, // 二维码大小
 				unit: 'upx', // 单位
-				// background: '#b4e9e2', // 背景色
-				// foreground: '#309286', // 前景色
+				background: '#b4e9e2', // 背景色
+				foreground: '#309286', // 前景色
 				pdground: '#32dbc6', // 角标色
 				icon: '', // 二维码图标
 				iconsize: 40, // 二维码图标大小
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
-				onval: true, // val值变化时自动重新生成二维码
+				onval: false, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
 				src: '', // 二维码生成后的图片地址或base64
 				bottomData: [
-					'#000000', '#fff', '#F600FF', '#2000FF', '#55FFFF',
+					'#000000', '#ffffff', '#F600FF', '#2000FF', '#55FFFF',
 					'#F5999D', '#81CA9D', '#FBDF26', '#6CCFF7', '#3CAEEF',
 					'#EE105A', '#31A650', '#8FC63D', '#F40103', '#F7941E'
 				],
 				changeType: 1,
 				backgroundIndex: 0,
-				foregroundIndex: 1
+				foregroundIndex: 1,
 			}
 		},
 		computed: {
 			...mapState(['qrcode']),
-			val(){
-				return this.qrcode;
-			},
 			bottom_title() {
 				return this.changeType === 2 ? '背景色' : '前景色';
 			},

@@ -1,11 +1,11 @@
 <template>
 	<view class="main">
 		<view class="uni-phone">
-			<textarea @blur="bindTextAreaBlur" auto-height maxlength:200 placeholder="请输入手机号码" />
+			<textarea @blur="bindTextAreaPhone" auto-height maxlength:200 placeholder="请输入手机号码" />
 		</view>
 		
 		<view class="uni-textarea">
-			<textarea @blur="bindTextAreaBlur" auto-height maxlength:200 placeholder="短信内容" type='number' />
+			<textarea @blur="bindTextAreaContent" auto-height maxlength:200 placeholder="短信内容" type='number' />
 		</view>
 		<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
 					 @tap="fnModify">生成二维码</button>
@@ -22,20 +22,24 @@
 		data() {
 			return {
 				modifyMobile: true,
-				data:''
+				phone:'',
+				content:''
 			}
 		},
 		methods: {
 			...mapMutations(['saveQRData']),
 			fnModify() {
-				this.saveQRData(this.data);
+				this.saveQRData(this.phone+this.content);
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});
 			},
-			bindTextAreaBlur: function (e) {
-				this.data = e.detail.value;
-			}
+			bindTextAreaPhone: function (e) {
+				this.phone = e.detail.value;
+			},
+			bindTextAreaContent: function (e) {
+				this.content = e.detail.value;
+			},
 		}
 	}
 </script>
