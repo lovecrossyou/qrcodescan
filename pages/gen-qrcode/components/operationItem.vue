@@ -1,5 +1,5 @@
 <template>
-	<view class="wrapper">
+	<view class="wrapper" @click="goPage">
 		<image :src="describeIcon" class="describe_icon"></image>
 		<view class="describe_text">{{describeText}}</view>
 	</view>
@@ -14,7 +14,15 @@
 		},
 		props:{
 			describeIcon:String,
-			describeText:String
+			describeText:String,
+			page:String
+		},
+		methods:{
+			goPage(){
+				uni.navigateTo({
+					url:this.page
+				})
+			}
 		}
 	}
 </script>
