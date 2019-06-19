@@ -1,7 +1,7 @@
 {
-    "name" : "TT优速",
+    "name" : "二维码扫描",
     "appid" : "__UNI__1E9A940",
-    "description" : "登录模板",
+    "description" : "二维码扫描",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,

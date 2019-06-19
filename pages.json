@@ -1,12 +1,18 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页,
-	{
-            "path" : "pages/history/history",
-            "style" : {
-				"navigationBarTitleText":"历史"
+	 {
+			"path": "pages/gen-qrcode/gen-qrcode",
+			"style": {
+				"navigationBarTitleText": "生成二维码"
 			}
-        },
-		 {
+		},
+		{
+			"path": "pages/history/history",
+			"style": {
+				"navigationBarTitleText": "扫描"
+			}
+		},
+		{
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "我的"
@@ -74,54 +80,82 @@
 				"navigationBarTitleText": "注册"
 			}
 		}
-	    
-        ,{
-            "path" : "pages/buss-card/buss-card",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/text-input/text-input",
-            "style" : {
-				"navigationBarTitleText":"文本"
+
+		, {
+			"path": "pages/buss-card/buss-card",
+			"style": {
+				"navigationBarTitleText": "名片"
 			}
-        }
-        ,{
-            "path" : "pages/weburl/weburl",
-            "style" : {
-				"navigationBarTitleText":"网址"
+		}, {
+			"path": "pages/text-input/text-input",
+			"style": {
+				"navigationBarTitleText": "文本"
 			}
-        }
-        ,{
-            "path" : "pages/phone/phone",
-            "style" : {
-				"navigationBarTitleText":"电话"
+		}, {
+			"path": "pages/weburl/weburl",
+			"style": {
+				"navigationBarTitleText": "网址"
 			}
-        }
-        ,{
-            "path" : "pages/msg/msg",
-            "style" : {
-				"navigationBarTitleText":"信息"
+		}, {
+			"path": "pages/phone/phone",
+			"style": {
+				"navigationBarTitleText": "电话"
 			}
-        }
-        ,{
-            "path" : "pages/wifi/wifi",
-            "style" : {
-				"navigationBarTitleText":"Wi-Fi"
+		}, {
+			"path": "pages/msg/msg",
+			"style": {
+				"navigationBarTitleText": "信息"
 			}
-        }
-    ],
+		}, {
+			"path": "pages/wifi/wifi",
+			"style": {
+				"navigationBarTitleText": "Wi-Fi"
+			}
+		},
+		{
+			"path": "pages/buss-card/setting-qrcode",
+			"style": {
+				"navigationBarTitleText": "二维码图片"
+			}
+		}, {
+			"path": "pages/qrresult/qrresult",
+			"style": {
+				"navigationBarTitleText": "扫描结果"
+			}
+		}, {
+			"path": "pages/scanlist/scanlist",
+			"style": {
+				"navigationBarTitleText": "扫描历史"
+			}
+		}, {
+			"path": "pages/scan/scan",
+			"style": {
+				"navigationBarTitleText": "扫描"
+			}
+		}
+	],
 	"tabBar": {
 		"color": "#7a7e83",
 		"selectedColor": "#0faeff",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/history/history",
+			"pagePath": "pages/gen-qrcode/gen-qrcode",
+			"text": "生成二维码",
+			"iconPath": "static/img/home.png",
+			"selectedIconPath": "static/img/homeHL.png"
+		}, {
+			"pagePath": "pages/scan/scan",
+			"text": "扫描",
+			"iconPath": "static/img/home.png",
+			"selectedIconPath": "static/img/homeHL.png"
+		}, {
+			"pagePath": "pages/scanlist/scanlist",
 			"text": "历史",
 			"iconPath": "static/img/home.png",
 			"selectedIconPath": "static/img/homeHL.png"
 		}, {
 			"pagePath": "pages/driver/me/me",
-			"text": "更多",
+			"text": "我",
 			"iconPath": "static/img/user.png",
 			"selectedIconPath": "static/img/userHL.png"
 		}]

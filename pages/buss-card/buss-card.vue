@@ -85,7 +85,10 @@
 			 * 提交按钮点击执行
 			 */
 			fnModify() {
-				console.log(JSON.stringify(this.mobile));
+				console.log('xx');
+				uni.navigateTo({
+					url:'/pages/buss-card/setting-qrcode'
+				});
 			},
 			/**
 			 * 获取验证码

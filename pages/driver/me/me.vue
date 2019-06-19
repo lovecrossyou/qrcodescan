@@ -61,6 +61,7 @@
 <style>
 	.main {
 		width: 100%;
+		
 	}
 
 	.person-head {
