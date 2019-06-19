@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<text class="qrimg">
-			{{qrData}}
+			{{qrcode}}
 		</text>
 
 		<view class="item" @click="copy">
@@ -11,16 +11,22 @@
 </template>
 
 <script>
+	import {
+        mapState
+    } from 'vuex'
 	export default {
 		data() {
 			return {
-				qrData: '13131313131313131311313131哈哈哈哈哈哈13131331'
+				
 			}
+		},
+		computed:{
+			...mapState(['qrcode'])
 		},
 		methods: {
 			copy() {
 				uni.setClipboardData({
-					data: this.qrData,
+					data: this.qrcode,
 					success: function() {
 						uni.showToast({
 							title:"复制成功"

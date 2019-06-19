@@ -33,6 +33,9 @@
 </template>
 
 <script>
+	import {
+        mapMutations
+    } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -41,11 +44,18 @@
 			}
 		},
 		methods: {
-			fnModify() {
-				console.log(JSON.stringify(this.mobile));
-			},
 			changeType(index){
 				this.activeIndex=index;
+			},
+			...mapMutations(['saveQRData']),
+			fnModify() {
+				this.saveQRData(this.data);
+				uni.navigateTo({
+					url:'/pages/buss-card/setting-qrcode'
+				});
+			},
+			bindTextAreaBlur: function (e) {
+				this.data = e.detail.value;
 			}
 		}
 	}

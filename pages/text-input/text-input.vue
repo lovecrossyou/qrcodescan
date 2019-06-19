@@ -19,7 +19,9 @@
 		},
 		methods: {
 			fnModify() {
-				console.log(JSON.stringify(this.mobile));
+				uni.navigateTo({
+					url:'/pages/buss-card/setting-qrcode'
+				});
 			},
 		}
 	}

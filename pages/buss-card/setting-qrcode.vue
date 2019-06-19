@@ -13,15 +13,15 @@
 		</view>
 		<view class="uni-padding-wrap">
 			<view class="btns">
-				<view class="primary" @tap="togglePopup('bottom-share',1)">前景色</view>
+				<view class="primary" @tap="toggleForegroundPopup('bottom')">前景色</view>
 				<view class="primary" @tap="selectIcon">选择二维码图标</view>
-				<view class="primary" @tap="togglePopup('bottom-share',2)">背景色</view>
+				<view class="primary" @tap="toggleBgPopup('bottom',2)">背景色</view>
 				<view class="primary_bule" @tap="saveQrcode">保存到手机</view>
 				<view class="primary" @tap="shareQrcode">分享给好友</view>
 			</view>
 		</view>
 
-		<uni-popup :show="type === 'bottom-share'" position="bottom" @hidePopup="togglePopup('')">
+		<uni-popup :show="type === 'bottom'" position="bottom" @hidePopup="togglePopup('')">
 			<view class="bottom-title">{{bottom_title}}</view>
 			<view class="bottom-content">
 				<view v-for="(item, index) in bottomData" :key="index" class="bottom-content-box" @click="changeColor(index)">
@@ -35,15 +35,15 @@
 </template>
 <script>
 	import tkiQrcode from '@/components/tki-qrcode/tki-qrcode.vue';
+	import uniPopup from "@/components/uni-popup/uni-popup.vue";
 	import {
-		uniPopup
-	} from "@/components/uni-popup/uni-popup.vue";
+        mapState
+    } from 'vuex'
 	export default {
 		data() {
 			return {
 				type: '',
 				ifShow: true,
-				val: '二维码', // 要生成的二维码值
 				size: 200, // 二维码大小
 				unit: 'upx', // 单位
 				// background: '#b4e9e2', // 背景色
@@ -52,7 +52,7 @@
 				icon: '', // 二维码图标
 				iconsize: 40, // 二维码图标大小
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
-				onval: false, // val值变化时自动重新生成二维码
+				onval: true, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
 				src: '', // 二维码生成后的图片地址或base64
 				bottomData: [
@@ -60,14 +60,18 @@
 					'#F5999D', '#81CA9D', '#FBDF26', '#6CCFF7', '#3CAEEF',
 					'#EE105A', '#31A650', '#8FC63D', '#F40103', '#F7941E'
 				],
-				isChangeBgColor: false,
+				changeType: 1,
 				backgroundIndex: 0,
-				foregroundIndex: 0
+				foregroundIndex: 1
 			}
 		},
 		computed: {
+			...mapState(['qrcode']),
+			val(){
+				return this.qrcode;
+			},
 			bottom_title() {
-				return this.isChangeBgColor===2 ? '背景色' : '前景色';
+				return this.changeType === 2 ? '背景色' : '前景色';
 			},
 			backgroundColor() {
 				return this.bottomData[this.backgroundIndex];
@@ -78,7 +82,7 @@
 		},
 		methods: {
 			changeColor(index) {
-				if (this.isChangeBgColor===2) {
+				if (this.changeType === 2) {
 					this.backgroundIndex = index;
 				} else {
 					this.foregroundIndex = index;
@@ -87,10 +91,16 @@
 					this.creatQrcode()
 				}, 100);
 			},
+			toggleForegroundPopup(){
+				this.type = "bottom";
+				this.changeType = 1;
+			},
+			toggleBgPopup(){
+				this.type = "bottom";
+				this.changeType = 2;
+			},
 			togglePopup(type, isBg) {
 				this.type = type;
-				this.isChangeBgColor = isBg;
-				console.log('type ', type);
 			},
 			sliderchange(e) {
 				this.size = e.detail.value
@@ -204,8 +214,8 @@
 		padding: 0 24upx;
 		font-size: 28upx;
 	}
-	
-	.body-view{
+
+	.body-view {
 		padding: 0 24upx;
 		box-sizing: border-box;
 		width: 702upx;

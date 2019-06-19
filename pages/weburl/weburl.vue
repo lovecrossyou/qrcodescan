@@ -11,16 +11,27 @@
 </template>
 
 <script>
+	import {
+        mapMutations
+    } from 'vuex'
 	export default {
 		data() {
 			return {
-				modifyMobile: true
+				modifyMobile: true,
+				data:''
 			}
 		},
 		methods: {
+			...mapMutations(['saveQRData']),
 			fnModify() {
-				console.log(JSON.stringify(this.mobile));
+				this.saveQRData(this.data);
+				uni.navigateTo({
+					url:'/pages/buss-card/setting-qrcode'
+				});
 			},
+			bindTextAreaBlur: function (e) {
+				this.data = e.detail.value;
+			}
 		}
 	}
 </script>
