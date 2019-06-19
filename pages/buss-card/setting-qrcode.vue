@@ -1,9 +1,9 @@
 <template>
 	<view class="container">
 		<view class="qrimg">
-			<tki-qrcode v-if="ifShow" ref="qrcode" :val="val" :size="size" :unit="unit" :background="background" :foreground="foreground"
-			 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval" :loadMake="loadMake"
-			 :usingComponents="true" @result="qrR" />
+			<tki-qrcode v-if="ifShow" ref="qrcode" :val="val" :size="size" :unit="unit" :background="backgroundColor"
+			 :foreground="foregroundColor" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
+			 :loadMake="loadMake" :usingComponents="true" @result="qrR" />
 		</view>
 		<view class="uni-padding-wrap uni-common-mt">
 			<view class="uni-title">设置二维码大小</view>
@@ -17,7 +17,7 @@
 				<view class="primary" @tap="selectIcon">选择二维码图标</view>
 				<view class="primary" @tap="togglePopup('bottom-share',true)">背景色</view>
 				<view class="primary_bule" @tap="saveQrcode">保存到手机</view>
-				<view class="primary" @tap="saveQrcode">分享给好友</view>
+				<view class="primary" @tap="shareQrcode">分享给好友</view>
 			</view>
 		</view>
 
@@ -46,8 +46,8 @@
 				val: '二维码', // 要生成的二维码值
 				size: 200, // 二维码大小
 				unit: 'upx', // 单位
-				background: '#b4e9e2', // 背景色
-				foreground: '#309286', // 前景色
+				// background: '#b4e9e2', // 背景色
+				// foreground: '#309286', // 前景色
 				pdground: '#32dbc6', // 角标色
 				icon: '', // 二维码图标
 				iconsize: 40, // 二维码图标大小
@@ -60,23 +60,33 @@
 					'#F5999D', '#81CA9D', '#FBDF26', '#6CCFF7', '#3CAEEF',
 					'#EE105A', '#31A650', '#8FC63D', '#F40103', '#F7941E'
 				],
-				isChangeBgColor: false
+				isChangeBgColor: false,
+				backgroundIndex: 0,
+				foregroundIndex: 0
 			}
 		},
-		computed:{
-			bottom_title(){
-				return this.isChangeBgColor? '背景色' : '前景色';
+		computed: {
+			bottom_title() {
+				return this.isChangeBgColor ? '背景色' : '前景色';
+			},
+			backgroundColor() {
+				return this.bottomData[this.backgroundIndex];
+			},
+			foregroundColor() {
+				return this.bottomData[this.foregroundIndex];
 			}
 		},
 		methods: {
 			changeColor(index) {
 				console.log('index ', index);
 				if (this.isChangeBgColor) {
-					this.background = this.bottomData[index];
+					this.backgroundIndex = index;
 				} else {
-					this.foreground = this.bottomData[index];
+					this.foregroundIndex = index;
 				}
-				this.creatQrcode();
+				setTimeout(() => {
+					this.creatQrcode()
+				}, 100);
 			},
 			togglePopup(type, isBg) {
 				this.type = type;
@@ -101,6 +111,9 @@
 			},
 			ifQrcode() {
 				this.ifShow = !this.ifShow
+			},
+			shareQrcode() {
+
 			},
 			selectIcon() {
 				let that = this
@@ -174,8 +187,8 @@
 		width: 100%;
 		margin-bottom: 20upx;
 	}
-	
-	.bottom-title{
+
+	.bottom-title {
 		color: #333333;
 		font-size: 28upx;
 	}
@@ -191,6 +204,12 @@
 	.uni-title {
 		padding: 0 24upx;
 		font-size: 28upx;
+	}
+	
+	.body-view{
+		padding: 0 24upx;
+		box-sizing: border-box;
+		width: 702upx;
 	}
 
 	.btns {
