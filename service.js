@@ -90,7 +90,8 @@ const genScanHistory = (data,type) => {
 	const myDate=new Date()
 	const id = Date.now().toString(12);
 	const time = myDate.toLocaleDateString() + myDate.toLocaleTimeString();
-	const storeData = Object.assign({}, data, {
+	const storeData = Object.assign({}, {
+		name:data,
 		id,
 		type,
 		time
@@ -125,6 +126,9 @@ const delGenHistory = id => {
 	uni.setStorageSync(GEN_HISTORY, JSON.stringify(list));
 }
 
+const clearAll = ()=>{
+	uni.clearStorageSync();
+}
 
 export default {
 	getToken,
@@ -136,5 +140,6 @@ export default {
 	delScanHistory,
 	genScanHistory,
 	loadGenHistory,
-	delGenHistory
+	delGenHistory,
+	clearAll
 }

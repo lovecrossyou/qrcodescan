@@ -38,7 +38,8 @@
 					that.saveQRData(res.result)
 					uni.navigateTo({
 						url:"/pages/qrresult/qrresult"
-					})
+					});
+					service.addScanHistory(res.result,this.scanType);
 				}
 			});
 		}

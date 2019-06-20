@@ -112,9 +112,7 @@
 			saveQrcode() {
 				this.$refs.qrcode._saveCode();
 				//本地存储
-				// service.genScanHistory(this.qrcode,this.scanType);
-				service.addScanHistory(this.qrcode,this.scanType);
-
+				service.genScanHistory(this.qrcode,this.scanType);
 			},
 			qrR(res) {
 				this.src = res

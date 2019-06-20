@@ -5,7 +5,7 @@
 			<view class="segmented_control_area">
 				<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button" active-color="#4A4A4A"></uni-segmented-control>
 			</view>
-			<view class="clear_area">清空</view>
+			<view @click="clearAll" class="clear_area">清空</view>
 		</view>
 		<view class="content">
 			<block v-for="(item,index) in genList" :key="item.id">
@@ -49,10 +49,14 @@
 			// 生成历史
 			const rawGenHistory = service.loadGenHistory();
 			this.genList = rawGenHistory.map(item => {
+				let name = item.name.slice(0,3);
+				if(item.type ==='vcard'){
+					name = "名片"
+				}
 				return {
 					id: item.id,
 					qrCodeImg: 'http://img0.imgtn.bdimg.com/it/u=1500889739,877761595&fm=11&gp=0.jpg',
-					codeName: item.name,
+					codeName: name,
 					codeTime: item.time,
 				}
 			});
@@ -60,7 +64,7 @@
 			const rawScanHistory = service.loadScanHistory();
 			this.scanList = rawScanHistory.map(item => {
 				
-				let name = item.name.slice(0,3);
+				let name = item.name;
 				if(item.type ==='vcard'){
 					name = "名片"
 				}
@@ -77,6 +81,10 @@
 				if (this.current !== index) {
 					this.current = index;
 				}
+			},
+			clearAll(){
+				// service.clearAll();
+				// this.genList = [];
 			},
 			delitem(id,index,type){
 				if(type===0){
