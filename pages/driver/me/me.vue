@@ -12,7 +12,7 @@
 				<cmd-icon type="settings" size="24" color="#368dff"></cmd-icon>
 			</cmd-cell-item>
 			<cmd-cell-item title="评价APP" slot-left arrow @click="goabout">
-				<cmd-icon type="settings" size="24" color="#368dff"></cmd-icon>
+				<cmd-icon type="credit-card" size="24" color="#368dff"></cmd-icon>
 			</cmd-cell-item>
 			<cmd-cell-item title="清除缓存" addon="v1.0" slot-left arrow>
 				<cmd-icon type="alert-circle" size="24" color="#368dff"></cmd-icon>
