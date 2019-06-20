@@ -1,6 +1,6 @@
 const qrcode = {
 	wifi: wifi=>{
-		return 'WIFI:S:'+wifi.name+';T:WPA;P:'+wifi.password+';;'
+		return 'WIFI:S:'+wifi.name+';T:'+wifi.type+';P:'+wifi.password+';;'
 	},
 	url: url => {
 		if(url.indexOf('http')===-1){

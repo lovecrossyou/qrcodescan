@@ -59,7 +59,6 @@
 			...mapMutations(['saveQRData']),
 			fnModify() {
 				const qrStr = qrcode.wifi(this.wifi);
-				
 				this.saveQRData(qrStr);
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
