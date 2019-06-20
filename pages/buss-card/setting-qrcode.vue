@@ -36,7 +36,8 @@
 	import tkiQrcode from '@/components/tki-qrcode/tki-qrcode.vue';
 	import uniPopup from "@/components/uni-popup/uni-popup.vue";
 	import {
-        mapState
+        mapState,
+		mapActions
     } from 'vuex';
 	import service from'../../service.js'
 	export default {
@@ -82,6 +83,7 @@
 			this.scanType = option.type;
 		},
 		methods: {
+			...mapActions(['loadGenList']),
 			changeColor(index) {
 				if (this.changeType === 2) {
 					this.backgroundIndex = index;
@@ -113,6 +115,8 @@
 				this.$refs.qrcode._saveCode();
 				//本地存储
 				service.genScanHistory(this.qrcode,this.scanType);
+				//刷新历史列表
+				this.loadGenList();
 			},
 			qrR(res) {
 				this.src = res

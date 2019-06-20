@@ -35,66 +35,41 @@
 <script>
 	import uniSegmentedControl from './components/uni-segmented-control.vue';
 	import service from '../../service.js'
+	import {mapMutations,mapState,mapActions} from "vuex"
 
 	export default {
 		data() {
 			return {
 				items: ['生成记录', '扫描记录'],
-				current: 0,
-				genList: [],
-				scanList:[]
+				current: 0
 			};
 		},
-		onLoad(opt) {
-			// 生成历史
-			const rawGenHistory = service.loadGenHistory();
-			this.genList = rawGenHistory.map(item => {
-				let name = item.name.slice(0,3);
-				if(item.type ==='vcard'){
-					name = "名片"
-				}
-				return {
-					id: item.id,
-					qrCodeImg: 'http://img0.imgtn.bdimg.com/it/u=1500889739,877761595&fm=11&gp=0.jpg',
-					codeName: name,
-					codeTime: item.time,
-				}
-			});
-			// 扫描历史
-			const rawScanHistory = service.loadScanHistory();
-			this.scanList = rawScanHistory.map(item => {
-				
-				let name = item.name;
-				if(item.type ==='vcard'){
-					name = "名片"
-				}
-				return {
-					id: item.id,
-					qrCodeImg: 'http://img0.imgtn.bdimg.com/it/u=1500889739,877761595&fm=11&gp=0.jpg',
-					codeName: name,
-					codeTime: item.time,
-				}
-			});
+		computed:{
+			...mapState(['genList','scanList'])
+		},
+		onLoad() {
+			this.loadGenList();
+			this.loadScanList();
 		},
 		methods: {
+			...mapActions(['loadGenList','loadScanList']),
 			onClickItem(index) {
 				if (this.current !== index) {
 					this.current = index;
 				}
 			},
-			clearAll(){
+			clearAll() {
 				// service.clearAll();
 				// this.genList = [];
 			},
-			delitem(id,index,type){
-				if(type===0){
+			delitem(id, index, type) {
+				if (type === 0) {
 					//生成历史删除
-					this.genList.splice(index,1);
+					this.genList.splice(index, 1);
 					service.delGenHistory(id);
-				}
-				else{
+				} else {
 					// 扫描删除
-					this.scanList.splice(index,1);
+					this.scanList.splice(index, 1);
 					service.delScanHistory(id);
 				}
 			}
@@ -150,7 +125,6 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding-top: 30upx;
 		box-sizing: border-box;
 		align-items: center;
 		background-color: #fff;

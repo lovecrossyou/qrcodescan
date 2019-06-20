@@ -16,7 +16,8 @@
 <script>
 	import operationItem from "./components/operationItem.vue";
 	import {
-        mapMutations
+        mapMutations,
+		mapActions
     } from 'vuex'
 	
 	export default {
@@ -27,7 +28,8 @@
 			operationItem
 		},
 		methods: {
-			...mapMutations(['saveQRData'])
+			...mapMutations(['saveQRData']),
+			...mapActions(['loadScanList'])
 		},
 		onNavigationBarButtonTap() {
 			let that = this;
@@ -40,6 +42,8 @@
 						url:"/pages/qrresult/qrresult"
 					});
 					service.addScanHistory(res.result,this.scanType);
+					//刷新历史列表
+					this.loadScanList();
 				}
 			});
 		}

@@ -134,13 +134,7 @@
 		}, {
 			"path": "pages/scanlist/scanlist",
 			"style": {
-				"navigationBarTitleText": "扫描历史",
-				"navigationStyle": "custom",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent" //透明渐变导航栏,
-					}
-				}
+				"navigationBarTitleText": "扫描历史"
 			}
 		}, {
 			"path": "pages/scan/scan",
