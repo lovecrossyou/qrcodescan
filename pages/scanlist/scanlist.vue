@@ -35,7 +35,11 @@
 <script>
 	import uniSegmentedControl from './components/uni-segmented-control.vue';
 	import service from '../../service.js'
-	import {mapMutations,mapState,mapActions} from "vuex"
+	import {
+		mapMutations,
+		mapState,
+		mapActions
+	} from "vuex"
 
 	export default {
 		data() {
@@ -44,23 +48,26 @@
 				current: 0
 			};
 		},
-		computed:{
-			...mapState(['genList','scanList'])
+		computed: {
+			...mapState(['genList', 'scanList'])
 		},
 		onLoad() {
 			this.loadGenList();
 			this.loadScanList();
 		},
 		methods: {
-			...mapActions(['loadGenList','loadScanList']),
+			...mapActions(['loadGenList', 'loadScanList','clearGenList','clearScanList']),
 			onClickItem(index) {
 				if (this.current !== index) {
 					this.current = index;
 				}
 			},
 			clearAll() {
-				// service.clearAll();
-				// this.genList = [];
+				if (this.current === 0) {
+					this.clearGenList();
+				} else {
+					this.clearScanList();
+				}
 			},
 			delitem(id, index, type) {
 				if (type === 0) {

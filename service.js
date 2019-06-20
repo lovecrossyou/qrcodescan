@@ -2,8 +2,8 @@
 const TOKEN_KEY = 'TOKEN_KEY';
 const INFO_KEY = 'INFO_KEY';
 
-const SCAN_HISTORY = 'SCAN_HISTORY';
-const GEN_HISTORY = 'GEN_HISTORY';
+export const SCAN_HISTORY = 'SCAN_HISTORY';
+export const GEN_HISTORY = 'GEN_HISTORY';
 
 const getToken = function() {
 	let ret = '';
@@ -126,8 +126,8 @@ const delGenHistory = id => {
 	uni.setStorageSync(GEN_HISTORY, JSON.stringify(list));
 }
 
-const clearAll = ()=>{
-	uni.clearStorageSync();
+const clearAll = (type)=>{
+	uni.removeStorageSync(type);
 }
 
 export default {

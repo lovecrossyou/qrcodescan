@@ -36,6 +36,14 @@ const store = new Vuex.Store({
 		},
     },
 	actions:{
+		clearGenList({state}){
+			state.genList = [];
+			service.clearAll(service.GEN_HISTORY);
+		},
+		clearScanList({state}){
+			state.scanList = [];
+			service.clearAll(service.SCAN_HISTORY);
+		},
 		loadGenList({commit}){
 			const rawGenHistory = service.loadGenHistory();
 			const list = rawGenHistory.map(item => {

@@ -4,13 +4,10 @@
 			"path": "pages/gen-qrcode/gen-qrcode",
 			"style": {
 				"navigationBarTitleText": "二维码生成",
+				"navigationStyle": "custom",
 				"app-plus": {
 					"titleNView": {
-						"buttons": [{
-							"text": "扫描",
-							"fontSize": "14",
-							"redDot": false
-						}]
+						"type": "transparent"
 					}
 				}
 			}
@@ -134,7 +131,10 @@
 		}, {
 			"path": "pages/scanlist/scanlist",
 			"style": {
-				"navigationBarTitleText": "扫描历史"
+				"navigationBarTitleText": "扫描历史",
+				"navigationBarShadow":{
+					"colorType":"grey"
+				}
 			}
 		}, {
 			"path": "pages/scan/scan",
@@ -165,8 +165,8 @@
 		}]
 	},
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#0faeff",
+		"navigationBarTextStyle": "black",
+		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#fbf9fe"
 	},
 	"condition": { //模式配置，仅开发期间生效

@@ -39,6 +39,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
+		margin-bottom: 30upx;
 	}
 	.describe_icon{
 		width: 140upx;
