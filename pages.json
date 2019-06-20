@@ -3,7 +3,7 @@
 		{
 			"path": "pages/gen-qrcode/gen-qrcode",
 			"style": {
-				"navigationBarTitleText": "二维码生成",
+				"navigationBarTitleText": "二维码生成器",
 				"navigationStyle": "custom",
 				"app-plus": {
 					"titleNView": {
@@ -36,13 +36,7 @@
 		}, {
 			"path": "pages/driver/me/me",
 			"style": {
-				"navigationBarTitleText": "我",
-				"navigationStyle": "custom",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent"
-					}
-				}
+				"navigationBarTitleText": "更多"
 			}
 		}, {
 			"path": "pages/announcement/announcement",
@@ -143,27 +137,6 @@
 			}
 		}
 	],
-	"tabBar": {
-		"color": "#7a7e83",
-		"selectedColor": "#0faeff",
-		"backgroundColor": "#ffffff",
-		"list": [{
-			"pagePath": "pages/gen-qrcode/gen-qrcode",
-			"text": "生成二维码",
-			"iconPath": "static/img/home.png",
-			"selectedIconPath": "static/img/homeHL.png"
-		}, {
-			"pagePath": "pages/scanlist/scanlist",
-			"text": "历史",
-			"iconPath": "static/img/home.png",
-			"selectedIconPath": "static/img/homeHL.png"
-		}, {
-			"pagePath": "pages/driver/me/me",
-			"text": "我",
-			"iconPath": "static/img/user.png",
-			"selectedIconPath": "static/img/userHL.png"
-		}]
-	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#FFFFFF",

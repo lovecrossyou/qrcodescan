@@ -1,18 +1,18 @@
 <template>
 	<view class="main">
 		<view class="uni-textarea">
-			<textarea @blur="bindTextAreaBlur" @maxlength='200' placeholder="请输入电话号码或手机号码" />
+			<textarea v-model="content" @maxlength='200' placeholder="请输入电话号码或手机号码" />
 			</view>
-			<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
-					 @tap="fnModify">生成二维码</button>
+			<view class="footer-btn" @click="fnModify">
+			生成二维码
+		</view>
         </view>
 		
 	</view>
 </template>
 
 <script>
-		import qrcode from "@/util/qrcode.js"
-
+	import qrcode from "@/util/qrcode.js"
 	import {
         mapMutations
     } from 'vuex'
@@ -20,21 +20,25 @@
 		data() {
 			return {
 				modifyMobile: true,
-				data:''
+				content:''
 			}
 		},
 		methods: {
 			...mapMutations(['saveQRData']),
 			fnModify() {
-				const qrStr = qrcode.phone(this.data);
+				if(this.content.length===0){
+					uni.showToast({
+						title: '请输入电话',
+						icon:"none"
+					});
+					return;
+				}
+				const qrStr = qrcode.phone(this.content);
 				
 				this.saveQRData(qrStr);
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});
-			},
-			bindTextAreaBlur: function (e) {
-				this.data = e.detail.value;
 			}
 		}
 	}
@@ -46,15 +50,37 @@
 	width: 100%;
 }
 
+.footer-btn {
+		background: #0AC160;
+		border: 2upx solid rgba(5, 5, 5, 0.08);
+		border-radius: 16upx;
+		text-align: center;
+		line-height: 100upx;
+		height: 100upx;
+
+		font-family: PingFangSC-Regular;
+		font-size: 36upx;
+		color: #FFFFFF;
+		margin-top: 56upx;
+		width: 702upx;
+		margin:56upx auto 0 auto;
+	}
+
 .uni-textarea{
-	height: 300upx;
+	height: 100upx;
 	background: #FFFFFF;
 	margin: 20upx;
 	padding: 20upx;
 	box-sizing: border-box;
+	border-radius: 16upx;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 textarea{
-	height: 300upx;
+	height: 100upx;
+	line-height: 100upx;
 }
 
 

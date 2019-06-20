@@ -1,10 +1,11 @@
 <template>
 	<view class="main">
 		<view class="uni-textarea">
-			<textarea @blur="bindTextAreaBlur" maxlength:200 placeholder="请输入内容" />
+			<textarea v-model="content" class="textarea" maxlength:200 placeholder="请输入内容" />
 			</view>
-			<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
-					 @tap="fnModify">生成二维码</button>
+			<view class="footer-btn" @click="fnModify">
+			生成二维码
+		</view>
         </view>
 		
 	</view>
@@ -14,20 +15,26 @@
 	import {
 		mapMutations
 	} from 'vuex'
+		import qrcode from "@/util/qrcode.js"
+
 	export default {
 		data() {
 			return {
 				modifyMobile: true,
-				data:''
+				content:''
 			}
 		},
 		methods: {
 			...mapMutations(['saveQRData']),
-			bindTextAreaBlur: function (e) {
-				this.data = e.detail.value;
-			},
 			fnModify() {
-				this.saveQRData(this.data);
+				if(this.content.length===0){
+					uni.showToast({
+						title: '请输入内容',
+						icon:"none"
+					});
+					return;
+				}
+				this.saveQRData(this.content);
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});
@@ -42,16 +49,34 @@
 	width: 100%;
 }
 
+.footer-btn {
+		background: #0AC160;
+		border: 2upx solid rgba(5, 5, 5, 0.08);
+		border-radius: 16upx;
+		text-align: center;
+		line-height: 100upx;
+		height: 100upx;
+
+		font-family: PingFangSC-Regular;
+		font-size: 36upx;
+		color: #FFFFFF;
+		margin-top: 56upx;
+		width: 702upx;
+		margin:56upx auto 0 auto;
+	}
 .uni-textarea{
-	height: 300upx;
+	height: 702upx;
 	background: #FFFFFF;
 	margin: 20upx;
-	padding: 20upx;
+	padding: 32upx 26upx;
 	box-sizing: border-box;
+	border-radius: 16upx;
 }
 
+
+
 textarea{
-	height: 300upx;
+	height: 702upx;
 }
 
 .btn-modify {

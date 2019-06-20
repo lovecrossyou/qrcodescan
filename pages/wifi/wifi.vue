@@ -25,8 +25,9 @@
 			</view>
 		</view>
 		
-		<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
-					 @tap="fnModify">生成二维码</button>
+		<view class="footer-btn" @click="fnModify">
+			生成二维码
+		</view>
         </view>
 		
 	</view>
@@ -88,16 +89,32 @@
 	box-sizing: border-box;
 }
 
+.footer-btn {
+		background: #0AC160;
+		border: 2upx solid rgba(5, 5, 5, 0.08);
+		border-radius: 16upx;
+		text-align: center;
+		line-height: 100upx;
+		height: 100upx;
+
+		font-family: PingFangSC-Regular;
+		font-size: 36upx;
+		color: #FFFFFF;
+		margin-top: 56upx;
+		width: 702upx;
+		margin:56upx auto 0 auto;
+	}
+
 .encrypt-item-active{
 	width: 160upx;
 	height: 80upx;
-	background: linear-gradient(to right, #88a1f9, #9ac6ff)!important;
 	line-height: 80upx;
 	text-align: center;
 	font-size: 24upx;
-	color: #FFFFFF;
-	
+	color: #0AC160;
+	background: #FFFFFF;
 	border-radius: 10upx;
+	border:solid 2upx #0AC160;
 }
 .encrypt-item{
 	width: 160upx;
@@ -122,6 +139,10 @@
 	margin: 20upx;
 	padding: 20upx;
 	box-sizing: border-box;
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .uni-textarea{

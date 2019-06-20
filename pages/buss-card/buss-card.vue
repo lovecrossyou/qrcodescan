@@ -1,32 +1,35 @@
 <template>
-	<view>
-		<!-- <cmd-nav-bar back title="修改密码"></cmd-nav-bar> -->
-		<cmd-page-body type="top">
-			<cmd-transition name="fade-up">
-				<view class="modify">
-					<view class="modify-phone">
-						<cmd-input v-model="vcard.name" maxlength="11" placeholder="姓名"></cmd-input>
-					</view>
-					<view class="modify-code">
-						<cmd-input v-model="vcard.phone" type="number" maxlength="11" placeholder="联系电话"></cmd-input>
-					</view>
-					<view class="modify-password">
-						<cmd-input v-model="vcard.addr" maxlength="26" placeholder="联系地址"></cmd-input>
-					</view>
-					<view class="modify-password">
-						<cmd-input v-model="vcard.company" maxlength="26" placeholder="公司名称"></cmd-input>
-					</view>
-					<view class="modify-password">
-						<cmd-input v-model="vcard.work" maxlength="26" placeholder="职位"></cmd-input>
-					</view>
-					<view class="modify-password">
-						<cmd-input v-model="vcard.email" maxlength="26" placeholder="邮件地址"></cmd-input>
-					</view>
-					<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
-					 @click="fnModify">生成二维码</button>
-				</view>
-			</cmd-transition>
-		</cmd-page-body>
+	<view class="main">
+		<view class="input-item">
+			<input v-model="vcard.name" class="uni-input" type="text" placeholder="姓名" />
+		</view>
+
+		<view class="input-item">
+			<input v-model="vcard.phone" class="uni-input" type="number" placeholder="联系电话" />
+		</view>
+
+		<view class="input-item">
+			<input v-model="vcard.addr" class="uni-input" type="text" placeholder="联系地址" />
+		</view>
+
+
+		<view class="input-item">
+			<input v-model="vcard.company" class="uni-input" type="text" placeholder="公司名称" />
+		</view>
+
+		<view class="input-item">
+			<input v-model="vcard.work" class="uni-input" type="text" placeholder="职位" />
+		</view>
+
+		<view class="input-item">
+			<input v-model="vcard.email" class="uni-input" type="text" placeholder="邮件地址" />
+		</view>
+
+
+		<view class="footer-btn" @click="fnModify">
+			生成二维码
+		</view>
+
 	</view>
 </template>
 
@@ -38,7 +41,7 @@
 	import {
 		mapMutations
 	} from 'vuex';
-	
+
 	import qrcode from "@/util/qrcode.js"
 	export default {
 		components: {
@@ -55,8 +58,8 @@
 					name: '',
 					addr: '',
 					work: '',
-					email:'',
-					company:''
+					email: '',
+					company: ''
 				},
 				passwordReg: /^\w+$/,
 				phoneReg: /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/,
@@ -75,6 +78,48 @@
 			 * 提交按钮点击执行
 			 */
 			fnModify() {
+				if(this.vcard.name.length==0){
+					uni.showToast({
+						title: '请输入名字',
+						icon:'none'
+					});
+					return;
+				}
+				if(this.vcard.phone.length==0){
+					uni.showToast({
+						title: '请输入名字',
+						icon:'none'
+					});
+					return;
+				}
+				if(this.vcard.addr.length==0){
+					uni.showToast({
+						title: '请输入联系地址',
+						icon:'none'
+					});
+					return;
+				}
+				if(this.vcard.company.length==0){
+					uni.showToast({
+						title: '请输入公司名称',
+						icon:'none'
+					});
+					return;
+				}
+				if(this.vcard.work.length==0){
+					uni.showToast({
+						title: '请输入职位',
+						icon:'none'
+					});
+					return;
+				}
+				if(this.vcard.email.length==0){
+					uni.showToast({
+						title: '请输入邮件地址',
+						icon:'none'
+					});
+					return;
+				}
 				const qrStr = qrcode.vcard(this.vcard);
 				this.saveQRData(qrStr);
 				uni.navigateTo({
@@ -93,10 +138,49 @@
 </script>
 
 <style>
+	.main {
+		background-color: #F2F2F2;
+		width: 100%;
+		padding: 24upx;
+		box-sizing: border-box;
+	}
+
+	.footer-btn {
+		background: #0AC160;
+		border: 2upx solid rgba(5, 5, 5, 0.08);
+		border-radius: 16upx;
+		text-align: center;
+		line-height: 100upx;
+		height: 100upx;
+
+		font-family: PingFangSC-Regular;
+		font-size: 36upx;
+		color: #FFFFFF;
+		margin-top: 56upx;
+	}
+
 	.modify {
 		/* margin-top: 28upx; */
 		margin-right: 72upx;
 		margin-left: 72upx;
+
+	}
+
+	.input-item {
+		width: 100%;
+		height: 100upx;
+		border-radius: 16upx;
+		background: #FFFFFF;
+		padding-left: 32upx;
+		box-sizing: border-box;
+		line-height: 100upx;
+
+		color: #333;
+		font-size: 32upx;
+		margin-bottom: 24upx;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 
 	.modify-phone {

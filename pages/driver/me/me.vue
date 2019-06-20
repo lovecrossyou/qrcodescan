@@ -1,12 +1,5 @@
 <template>
 	<view class="main">
-		<view class="person-head">
-			<cmd-avatar src="https://avatar.bbs.miui.com/images/noavatar_small.gif" @click="fnInfoWin" size="lg" :make="{'background-color': '#fff'}"></cmd-avatar>
-			<view class="person-head-box">
-				<view class="person-head-nickname">Slimmer</view>
-				<view class="person-head-username">ID：slimmer9501</view>
-			</view>
-		</view>
 		<view class="person-list">
 			<cmd-cell-item title="推荐给朋友" slot-left arrow>
 				<cmd-icon type="settings" size="24" color="#368dff"></cmd-icon>

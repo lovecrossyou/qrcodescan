@@ -2,13 +2,14 @@
 	<view class="main">
 		<view class="uni-phone">
 			<textarea @blur="bindTextAreaPhone" auto-height maxlength:200 placeholder="请输入手机号码" />
-		</view>
+			</view>
 		
 		<view class="uni-textarea">
 			<textarea @blur="bindTextAreaContent" auto-height maxlength:200 placeholder="短信内容" type='number' />
 		</view>
-		<button class="btn-modify" :class="modifyMobile ? 'btn-modify-active':''" :disabled="!modifyMobile" hover-class="btn-modify-hover"
-					 @tap="fnModify">生成二维码</button>
+		<view class="footer-btn" @click="fnModify">
+			生成二维码
+		</view>
         </view>
 		
 	</view>
@@ -53,20 +54,44 @@
 	width: 100%;
 }
 
+
+.footer-btn {
+		background: #0AC160;
+		border: 2upx solid rgba(5, 5, 5, 0.08);
+		border-radius: 16upx;
+		text-align: center;
+		line-height: 100upx;
+		height: 100upx;
+
+		font-family: PingFangSC-Regular;
+		font-size: 36upx;
+		color: #FFFFFF;
+		margin-top: 56upx;
+		width: 702upx;
+		margin:56upx auto 0 auto;
+	}
 .uni-phone{
-	height: 90upx;
+	height: 100upx;
 	background: #FFFFFF;
 	margin: 20upx;
 	padding: 20upx;
 	box-sizing: border-box;
+	border-radius: 16upx;
+	line-height: 100upx;
+	
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .uni-textarea{
-	height: 300upx;
+	height: 702upx;
 	background: #FFFFFF;
 	margin: 20upx;
 	padding: 20upx;
 	box-sizing: border-box;
+	
+	border-radius: 16upx;
 }
 
 .btn-modify {
