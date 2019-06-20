@@ -5,7 +5,7 @@
 			<cmd-transition name="fade-up">
 				<view class="modify">
 					<view class="modify-phone">
-						<cmd-input v-model="vcard.name" type="number" maxlength="11" placeholder="姓名"></cmd-input>
+						<cmd-input v-model="vcard.name" maxlength="11" placeholder="姓名"></cmd-input>
 					</view>
 					<view class="modify-code">
 						<cmd-input v-model="vcard.phone" type="number" maxlength="11" placeholder="联系电话"></cmd-input>
@@ -76,10 +76,9 @@
 			 */
 			fnModify() {
 				const qrStr = qrcode.vcard(this.vcard);
-				
 				this.saveQRData(qrStr);
 				uni.navigateTo({
-					url: '/pages/buss-card/setting-qrcode'
+					url: '/pages/buss-card/setting-qrcode?type=vcard'
 				});
 			}
 		},

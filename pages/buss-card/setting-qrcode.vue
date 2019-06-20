@@ -37,7 +37,8 @@
 	import uniPopup from "@/components/uni-popup/uni-popup.vue";
 	import {
         mapState
-    } from 'vuex'
+    } from 'vuex';
+	import service from'../../service.js'
 	export default {
 		data() {
 			return {
@@ -62,6 +63,7 @@
 				changeType: 1,
 				backgroundIndex: 0,
 				foregroundIndex: 1,
+				scanType:''
 			}
 		},
 		computed: {
@@ -75,6 +77,9 @@
 			foregroundColor() {
 				return this.bottomData[this.foregroundIndex];
 			}
+		},
+		onLoad(option) {
+			this.scanType = option.type;
 		},
 		methods: {
 			changeColor(index) {
@@ -105,7 +110,11 @@
 				this.$refs.qrcode._makeCode()
 			},
 			saveQrcode() {
-				this.$refs.qrcode._saveCode()
+				this.$refs.qrcode._saveCode();
+				//本地存储
+				// service.genScanHistory(this.qrcode,this.scanType);
+				service.addScanHistory(this.qrcode,this.scanType);
+
 			},
 			qrR(res) {
 				this.src = res
@@ -139,8 +148,7 @@
 		components: {
 			tkiQrcode,
 			uniPopup
-		},
-		onLoad: function() {},
+		}
 	}
 </script>
 
