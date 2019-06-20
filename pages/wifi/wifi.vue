@@ -1,11 +1,11 @@
 <template>
 	<view class="main">
 		<view class="uni-phone">
-			<textarea @blur="bindTextAreaName" auto-height maxlength:200 placeholder="无线账号" />
+			<textarea v-model="wifi.name" auto-height maxlength:200 placeholder="无线账号" />
 			</view>
 		
 		<view class="uni-phone">
-			<textarea @blur="bindTextAreaPwd" auto-height maxlength:200 placeholder="无线Wi-Fi密码" type='number' />
+			<textarea v-model="wifi.password" auto-height maxlength:200 placeholder="无线Wi-Fi密码" />
 		</view>
 		
 		<view class="type">
@@ -64,12 +64,6 @@
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});
-			},
-			bindTextAreaName: function (e) {
-				this.wifi.name = e.detail.value;
-			},
-			bindTextAreaPwd: function (e) {
-				this.wifi.password = e.detail.value;
 			}
 		}
 	}
