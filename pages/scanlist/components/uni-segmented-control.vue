@@ -101,7 +101,7 @@
 		box-sizing: border-box;
 		margin: 0 auto;
 		overflow: hidden;
-		height: 50upx;
+		height: 60upx;
 		align-items: center;
 	}
 

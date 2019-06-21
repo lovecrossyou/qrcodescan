@@ -214,7 +214,7 @@
 		margin-top: 10upx;
 		/* padding-top: 10upx;
 		box-sizing: border-box; */
-		flex: 1;
+		/* flex: 1; */
 		
 	}
 
