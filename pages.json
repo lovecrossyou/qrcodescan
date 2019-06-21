@@ -6,9 +6,7 @@
 				"navigationBarTitleText": "二维码生成器",
 				"navigationStyle": "custom",
 				"app-plus": {
-					"titleNView": {
-						"type": "transparent"
-					}
+					"titleNView": false
 				}
 			}
 		},
@@ -92,8 +90,11 @@
 			"path": "pages/scanlist/scanlist",
 			"style": {
 				"navigationBarTitleText": "扫描历史",
-				"navigationBarShadow":{
-					"colorType":"grey"
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
 				}
 			}
 		}, {

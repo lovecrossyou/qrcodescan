@@ -53,7 +53,7 @@ const store = new Vuex.Store({
 				}
 				return {
 					id: item.id,
-					qrCodeImg: 'http://img0.imgtn.bdimg.com/it/u=1500889739,877761595&fm=11&gp=0.jpg',
+					qrCodeImg: 'http://qnimage.xiteng.com/default.jpg',
 					codeName: name,
 					codeTime: item.time,
 					data:item.name,
@@ -71,7 +71,7 @@ const store = new Vuex.Store({
 				}
 				return {
 					id: item.id,
-					qrCodeImg: 'http://img0.imgtn.bdimg.com/it/u=1500889739,877761595&fm=11&gp=0.jpg',
+					qrCodeImg: 'http://qnimage.xiteng.com/default.jpg',
 					codeName: name,
 					codeTime: item.time,
 					data:item.name,

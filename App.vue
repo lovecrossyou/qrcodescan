@@ -68,6 +68,10 @@
 		transform: scaleY(.5);
 		background-color: #c8c7cc;
 	}
+	
+	.uni-navbar-btn-text{
+		font-size: 16upx;
+	}
 
 	.input-group::after {
 		position: absolute;

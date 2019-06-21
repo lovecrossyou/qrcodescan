@@ -1,11 +1,25 @@
 <template>
 	<view class="wrapper">
-		<view class="left_area">
-			<view class="placeholder"></view>
-			<view class="segmented_control_area">
-				<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button" active-color="#4A4A4A"></uni-segmented-control>
+		<cover-view>
+			<uni-nav-bar right-text="清空" @click-right="clearAll">
+				<view class="segmented_control_area">
+					<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button"
+					 active-color="#4A4A4A"></uni-segmented-control>
+				</view>
+			</uni-nav-bar>
+		</cover-view>
+		<view v-if="genList.length==0&current==0" class="empty-wrapper">
+			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
+			<view class="empty-text">
+				暂无记录
 			</view>
-			<view @click="clearAll" class="clear_area">清空</view>
+		</view>
+
+		<view v-if="scanList.length==0&current==1" class="empty-wrapper">
+			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
+			<view class="empty-text">
+				暂无记录
+			</view>
 		</view>
 		<view class="content">
 			<block v-for="(item,index) in genList" :key="item.id">
@@ -19,7 +33,7 @@
 				</view>
 			</block>
 			<block v-for="(item,index) in scanList" :key="item.id">
-				<view v-show="current === 1" class="content_main_content" @click="goDetail(item)">
+				<view v-show="current === 1" class="content_main_content" @click="goScanResult(item)">
 					<image :src="item.qrCodeImg" class="qr_code_img"></image>
 					<view class="center_content">
 						<view class="code_name">{{item.codeName}}</view>
@@ -29,25 +43,12 @@
 				</view>
 			</block>
 		</view>
-
-		<view v-if="genList.length==0&current==0" class="empty-wrapper">
-			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
-			<view class="empty-text">
-				暂无记录
-			</view>
-		</view>
-		
-		<view v-if="scanList.length==0&current==1" class="empty-wrapper">
-			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
-			<view class="empty-text">
-				暂无记录
-			</view>
-		</view>
 	</view>
 </template>
 
 <script>
 	import uniSegmentedControl from './components/uni-segmented-control.vue';
+	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue";
 	import service from '../../service.js'
 	import {
 		mapMutations,
@@ -73,9 +74,10 @@
 			...mapMutations(['saveQRData']),
 			...mapActions(['loadGenList', 'loadScanList', 'clearGenList', 'clearScanList']),
 			onClickItem(index) {
-				if (this.current !== index) {
-					this.current = index;
-				}
+				this.current = index;
+			},
+			goBack() {
+				uni.navigateBack();
 			},
 			clearAll() {
 				let that = this;
@@ -99,6 +101,13 @@
 					url: "/pages/scandetail/scandetail?type=" + item.type
 				})
 			},
+			goScanResult(item) {
+				console.log('item ', item);
+				this.saveQRData(item.data)
+				uni.navigateTo({
+					url: "/pages/qrresult/qrresult"
+				})
+			},
 			delitem(id, index, type) {
 				uni.showModal({
 					content: '确定删除本条记录',
@@ -119,7 +128,8 @@
 			}
 		},
 		components: {
-			uniSegmentedControl
+			uniSegmentedControl,
+			uniNavBar
 		}
 	};
 </script>
@@ -131,10 +141,14 @@
 		align-items: center;
 		justify-content: center;
 		position: fixed;
-		top: 0;
+		top: 200upx;
 		bottom: 0;
 		width: 100%;
-		
+
+	}
+
+	uni-segmented-control {
+		height: 48upx;
 	}
 
 	.empty-text {
@@ -198,7 +212,8 @@
 	}
 
 	.segmented_control_area {
-		flex: 1;
+		padding-top: 10upx;
+		/* flex: 1; */
 	}
 
 	.clear_area {

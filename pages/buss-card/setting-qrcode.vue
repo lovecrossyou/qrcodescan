@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="qrimg">
-			<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="backgroundColor" :foreground="foregroundColor" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
+			<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="background" :foreground="foreground" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
 			 :loadMake="loadMake" :usingComponents="true" @result="qrR" />
 		</view>
 		<view class="uni-padding-wrap uni-common-mt">
@@ -49,7 +49,7 @@
 				unit: 'upx', // 单位
 				background: '#b4e9e2', // 背景色
 				foreground: '#309286', // 前景色
-				pdground: '#32dbc6', // 角标色
+				pdground: '#ffffff', // 角标色
 				icon: '', // 二维码图标
 				iconsize: 40, // 二维码图标大小
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行

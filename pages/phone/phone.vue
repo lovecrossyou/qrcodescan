@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<view class="uni-textarea">
-			<textarea v-model="content" @maxlength='200' placeholder="请输入电话号码或手机号码" />
+			<textarea placeholder-class="placeholder" v-model="content" @maxlength='200' placeholder="请输入电话号码或手机号码" />
 			</view>
 			<view class="footer-btn" @click="fnModify">
 			生成二维码
@@ -49,6 +49,12 @@
 	background-color: #F2F2F2;
 	width: 100%;
 }
+
+.placeholder{
+	font-size: 24upx ;
+	color: #999999;
+}
+
 
 .footer-btn {
 		background: #0AC160;

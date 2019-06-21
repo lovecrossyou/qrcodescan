@@ -1,11 +1,11 @@
 <template>
 	<view class="main">
 		<view class="uni-phone">
-			<textarea @blur="bindTextAreaPhone" auto-height maxlength:200 placeholder="请输入手机号码" />
+			<textarea placeholder-class="placeholder" @blur="bindTextAreaPhone" auto-height maxlength:200 placeholder="请输入手机号码" />
 			</view>
 		
 		<view class="uni-textarea">
-			<textarea @blur="bindTextAreaContent" auto-height maxlength:200 placeholder="短信内容" type='number' />
+			<textarea placeholder-class="placeholder" @blur="bindTextAreaContent" auto-height maxlength:200 placeholder="短信内容" type='number' />
 		</view>
 		<view class="footer-btn" @click="fnModify">
 			生成二维码
@@ -54,6 +54,10 @@
 	width: 100%;
 }
 
+.placeholder{
+	font-size: 34upx;
+	color: #999999;
+}
 
 .footer-btn {
 		background: #0AC160;
