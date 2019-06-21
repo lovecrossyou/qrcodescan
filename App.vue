@@ -70,7 +70,7 @@
 	}
 	
 	.uni-navbar-btn-text{
-		font-size: 16upx;
+		font-size: 24upx;
 	}
 
 	.input-group::after {

@@ -1,11 +1,10 @@
 <template>
 	<view class="main">
-		<view class="uni-phone">
-			<textarea v-model="wifi.name" auto-height maxlength:200 placeholder="无线账号" />
-			</view>
-		
-		<view class="uni-phone">
-			<textarea v-model="wifi.password" auto-height maxlength:200 placeholder="无线Wi-Fi密码" />
+		<view class="input-item">
+			<input v-model="wifi.name" class="uni-input" type="text" placeholder="无线账号" />
+		</view>
+		<view class="input-item">
+			<input v-model="wifi.password" class="uni-input" type="text" placeholder="无线Wi-Fi密码" />
 		</view>
 		
 		<view class="type">
@@ -75,6 +74,8 @@
 .main{
 	background-color: #F2F2F2;
 	width: 100%;
+	padding: 24upx;
+	box-sizing: border-box;
 }
 
 .encrypt{
@@ -84,6 +85,22 @@
 	padding: 20upx;
 	box-sizing: border-box;
 }
+.input-item {
+		width: 100%;
+		height: 100upx;
+		border-radius: 16upx;
+		background: #FFFFFF;
+		padding-left: 32upx;
+		box-sizing: border-box;
+		line-height: 100upx;
+
+		color: #333;
+		font-size: 32upx;
+		margin-bottom: 24upx;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
 
 .footer-btn {
 		background: #0AC160;

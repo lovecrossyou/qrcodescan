@@ -101,6 +101,8 @@
 		box-sizing: border-box;
 		margin: 0 auto;
 		overflow: hidden;
+		height: 50upx;
+		align-items: center;
 	}
 
 	.segmented-control.button {
@@ -116,7 +118,7 @@
 	.segmented-control-item {
 		flex: 1;
 		text-align: center;
-		line-height: 60upx;
+		line-height: 50upx;
 		box-sizing: border-box;
 	}
 

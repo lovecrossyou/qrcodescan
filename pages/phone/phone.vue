@@ -1,8 +1,8 @@
 <template>
 	<view class="main">
-		<view class="uni-textarea">
-			<textarea placeholder-class="placeholder" v-model="content" @maxlength='200' placeholder="请输入电话号码或手机号码" />
-			</view>
+		<view class="input-item">
+			<input v-model="content" class="uni-input" type="number" placeholder="请输入电话号码或手机号码" />
+		</view>
 			<view class="footer-btn" @click="fnModify">
 			生成二维码
 		</view>
@@ -72,6 +72,23 @@
 		margin:56upx auto 0 auto;
 	}
 
+.input-item {
+		width: 100%;
+		height: 100upx;
+		border-radius: 16upx;
+		background: #FFFFFF;
+		padding-left: 32upx;
+		box-sizing: border-box;
+		line-height: 100upx;
+
+		color: #333;
+		font-size: 32upx;
+		margin-bottom: 24upx;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	
 .uni-textarea{
 	height: 100upx;
 	background: #FFFFFF;

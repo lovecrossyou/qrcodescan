@@ -1,13 +1,12 @@
 <template>
 	<view class="wrapper">
-		<cover-view>
+		<!-- <uni-nav-bar right-icon="scan" title="二维码生成器" @click-right="clickScan"></uni-nav-bar> -->
 			<uni-nav-bar right-text="清空" @click-right="clearAll">
 				<view class="segmented_control_area">
 					<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button"
 					 active-color="#4A4A4A"></uni-segmented-control>
 				</view>
 			</uni-nav-bar>
-		</cover-view>
 		<view v-if="genList.length==0&current==0" class="empty-wrapper">
 			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
 			<view class="empty-text">
@@ -23,9 +22,9 @@
 		</view>
 		<view class="content">
 			<block v-for="(item,index) in genList" :key="item.id">
-				<view v-show="current === 0" class="content_main_content" @click="goDetail(item)">
-					<image :src="item.qrCodeImg" class="qr_code_img"></image>
-					<view class="center_content">
+				<view v-show="current === 0" class="content_main_content">
+					<image :src="item.qrCodeImg" class="qr_code_img" @click="goDetail(item)"></image>
+					<view class="center_content" @click="goDetail(item)">
 						<view class="code_name">{{item.codeName}}</view>
 						<view class="code_time">{{item.codeTime}}</view>
 					</view>
@@ -34,8 +33,8 @@
 			</block>
 			<block v-for="(item,index) in scanList" :key="item.id">
 				<view v-show="current === 1" class="content_main_content" @click="goScanResult(item)">
-					<image :src="item.qrCodeImg" class="qr_code_img"></image>
-					<view class="center_content">
+					<image :src="item.qrCodeImg" class="qr_code_img" @click="goDetail(item)"></image>
+					<view class="center_content" @click="goDetail(item)">
 						<view class="code_name">{{item.codeName}}</view>
 						<view class="code_time">{{item.codeTime}}</view>
 					</view>
@@ -212,8 +211,11 @@
 	}
 
 	.segmented_control_area {
-		padding-top: 10upx;
-		/* flex: 1; */
+		margin-top: 10upx;
+		/* padding-top: 10upx;
+		box-sizing: border-box; */
+		flex: 1;
+		
 	}
 
 	.clear_area {

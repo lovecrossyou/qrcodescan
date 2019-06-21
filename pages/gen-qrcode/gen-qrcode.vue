@@ -74,9 +74,6 @@
 						this.loadScanList();
 					}
 				});
-			},
-			onNavigationBarButtonTap(){
-				this.clickScan();
 			}
 		}
 	};
