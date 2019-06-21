@@ -14,7 +14,7 @@
 				<!-- 标题插槽 -->
 				<slot></slot>
 			</view>
-			<view class="uni-navbar-header-btns" @tap="onClickRight">
+			<view class="uni-navbar-header-btns" @click.stop="onClickRight">
                 <view v-if="rightIcon.length">
                     <uni-icon :type="rightIcon" :color="color" size="24"></uni-icon>
                 </view>

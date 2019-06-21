@@ -1,6 +1,6 @@
 <template>
 	<view class="main">
-		<uni-nav-bar right-icon="scan" title="二维码生成器" @click-right="clickScan"></uni-nav-bar>
+		<uni-nav-bar right-icon="scan" title="二维码生成器" @clickRight="clickScan"></uni-nav-bar>
 		<view class="manage_wrapper">
 			<operationItem page="/pages/buss-card/buss-card" describeIcon="/static/gen-qrcode/home_icon_business_card@2x.png"
 			 describeText='名片'></operationItem>
@@ -68,7 +68,7 @@
 						that.result = res.result;
 						that.saveQRData(res.result)
 						uni.navigateTo({
-							url: "/pages/qrresult/qrresult?type="+this.scanType
+							url: "/pages/qrresult/qrresult?type=" + this.scanType
 						});
 						//刷新历史列表
 						this.loadScanList();

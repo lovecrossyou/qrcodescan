@@ -1,44 +1,49 @@
 <template>
 	<view class="wrapper">
-		<!-- <uni-nav-bar right-icon="scan" title="二维码生成器" @click-right="clickScan"></uni-nav-bar> -->
-			<uni-nav-bar right-text="清空" @click-right="clearAll">
-				<view class="segmented_control_area">
-					<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button"
-					 active-color="#4A4A4A"></uni-segmented-control>
+		<uni-nav-bar right-text="清空" @click-right="clearAll">
+			<view class="segmented_control_area">
+				<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button" active-color="#4A4A4A"></uni-segmented-control>
+			</view>
+		</uni-nav-bar>
+
+
+		<view v-if="current===0">
+			<view v-if="genList.length==0" class="empty-wrapper">
+				<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
+				<view class="empty-text">
+					暂无记录
 				</view>
-			</uni-nav-bar>
-		<view v-if="genList.length==0&current==0" class="empty-wrapper">
-			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
-			<view class="empty-text">
-				暂无记录
+			</view>
+
+		</view>
+		<view v-else-if="current==1">
+			<view v-if="scanList.length==0" class="empty-wrapper">
+				<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
+				<view class="empty-text">
+					暂无记录
+				</view>
 			</view>
 		</view>
 
-		<view v-if="scanList.length==0&current==1" class="empty-wrapper">
-			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
-			<view class="empty-text">
-				暂无记录
-			</view>
-		</view>
 		<view class="content">
 			<block v-for="(item,index) in genList" :key="item.id">
 				<view v-show="current === 0" class="content_main_content">
-					<image :src="item.qrCodeImg" class="qr_code_img" @click="goDetail(item)"></image>
-					<view class="center_content" @click="goDetail(item)">
+					<image :src="item.qrCodeImg" class="qr_code_img" @click.stop="goDetail(item)"></image>
+					<view class="center_content" @tap="goDetail(item)">
 						<view class="code_name">{{item.codeName}}</view>
 						<view class="code_time">{{item.codeTime}}</view>
 					</view>
-					<image @click="delitem(item.id,index,0)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
+					<image @tap="delitem(item.id,index,0)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
 				</view>
 			</block>
 			<block v-for="(item,index) in scanList" :key="item.id">
-				<view v-show="current === 1" class="content_main_content" @click="goScanResult(item)">
-					<image :src="item.qrCodeImg" class="qr_code_img" @click="goDetail(item)"></image>
-					<view class="center_content" @click="goDetail(item)">
+				<view v-show="current === 1" class="content_main_content">
+					<image :src="item.qrCodeImg" class="qr_code_img" @click.stop="goScanResult(item)"></image>
+					<view class="center_content" @click.stop="goScanResult(item)">
 						<view class="code_name">{{item.codeName}}</view>
 						<view class="code_time">{{item.codeTime}}</view>
 					</view>
-					<image @click.stop="delitem(item.id,index,1)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
+					<image @tap="delitem(item.id,index,1)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
 				</view>
 			</block>
 		</view>
@@ -215,7 +220,7 @@
 		/* padding-top: 10upx;
 		box-sizing: border-box; */
 		/* flex: 1; */
-		
+
 	}
 
 	.clear_area {
