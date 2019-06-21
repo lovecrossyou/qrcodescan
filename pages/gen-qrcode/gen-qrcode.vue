@@ -41,7 +41,10 @@
 
 	export default {
 		data() {
-			return {};
+			return {
+				scanType:'',
+				result:''
+			};
 		},
 		components: {
 			operationItem,
