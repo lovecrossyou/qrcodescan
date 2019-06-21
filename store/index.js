@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import service from '../service.js'
-
+import {GEN_HISTORY,SCAN_HISTORY} from "../service.js";
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -38,11 +38,11 @@ const store = new Vuex.Store({
 	actions:{
 		clearGenList({state}){
 			state.genList = [];
-			service.clearAll(service.GEN_HISTORY);
+			service.clearAll(GEN_HISTORY);
 		},
 		clearScanList({state}){
 			state.scanList = [];
-			service.clearAll(service.SCAN_HISTORY);
+			service.clearAll(SCAN_HISTORY);
 		},
 		loadGenList({commit}){
 			const rawGenHistory = service.loadGenHistory();
@@ -56,6 +56,8 @@ const store = new Vuex.Store({
 					qrCodeImg: 'http://img0.imgtn.bdimg.com/it/u=1500889739,877761595&fm=11&gp=0.jpg',
 					codeName: name,
 					codeTime: item.time,
+					data:item.name,
+					type:item.type
 				}
 			});
 			commit('saveGenList',list);
@@ -72,6 +74,8 @@ const store = new Vuex.Store({
 					qrCodeImg: 'http://img0.imgtn.bdimg.com/it/u=1500889739,877761595&fm=11&gp=0.jpg',
 					codeName: name,
 					codeTime: item.time,
+					data:item.name,
+					type:item.type
 				}
 			});
 			commit('saveScanList',list);

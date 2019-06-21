@@ -181,6 +181,7 @@
         height:44px;
         line-height:44px;
         font-size: 16px;
+		font-weight: 700;
     }
 	
 	.uni-navbar-header .uni-navbar-header-btns{

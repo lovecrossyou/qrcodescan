@@ -9,7 +9,7 @@
 		</view>
 		<view class="content">
 			<block v-for="(item,index) in genList" :key="item.id">
-				<view v-show="current === 0" class="content_main_content">
+				<view v-show="current === 0" class="content_main_content" @click="goDetail(item)">
 					<image :src="item.qrCodeImg" class="qr_code_img"></image>
 					<view class="center_content">
 						<view class="code_name">{{item.codeName}}</view>
@@ -19,13 +19,13 @@
 				</view>
 			</block>
 			<block v-for="(item,index) in scanList" :key="item.id">
-				<view v-show="current === 1" class="content_main_content">
+				<view v-show="current === 1" class="content_main_content"  @click="goDetail(item)">
 					<image :src="item.qrCodeImg" class="qr_code_img"></image>
 					<view class="center_content">
 						<view class="code_name">{{item.codeName}}</view>
 						<view class="code_time">{{item.codeTime}}</view>
 					</view>
-					<image @click="delitem(item.id,index,1)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
+					<image @click.stop="delitem(item.id,index,1)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
 				</view>
 			</block>
 		</view>
@@ -56,29 +56,52 @@
 			this.loadScanList();
 		},
 		methods: {
-			...mapActions(['loadGenList', 'loadScanList','clearGenList','clearScanList']),
+			...mapMutations(['saveQRData']),
+			...mapActions(['loadGenList', 'loadScanList', 'clearGenList', 'clearScanList']),
 			onClickItem(index) {
 				if (this.current !== index) {
 					this.current = index;
 				}
 			},
 			clearAll() {
-				if (this.current === 0) {
-					this.clearGenList();
-				} else {
-					this.clearScanList();
-				}
+				let that = this;
+				uni.showModal({
+					content: that.current === 0 ? '确认清空所有生成记录' : '确认清空所有扫描记录',
+					success: function(res) {
+						if (res.confirm) {
+							if (that.current === 0) {
+								that.clearGenList();
+							} else {
+								that.clearScanList();
+							}
+						}
+					}
+				});
+			},
+			goDetail(item){
+				console.log('item ', item);
+				this.saveQRData(item.data)
+				uni.navigateTo({
+					url:"/pages/scandetail/scandetail?type="+item.type
+				})
 			},
 			delitem(id, index, type) {
-				if (type === 0) {
-					//生成历史删除
-					this.genList.splice(index, 1);
-					service.delGenHistory(id);
-				} else {
-					// 扫描删除
-					this.scanList.splice(index, 1);
-					service.delScanHistory(id);
-				}
+				uni.showModal({
+					content: '确定删除本条记录',
+					success: function(res) {
+						if (res.confirm) {
+							if (type === 0) {
+								//生成历史删除
+								this.genList.splice(index, 1);
+								service.delGenHistory(id);
+							} else {
+								// 扫描删除
+								this.scanList.splice(index, 1);
+								service.delScanHistory(id);
+							}
+						}
+					}
+				});
 			}
 		},
 		components: {

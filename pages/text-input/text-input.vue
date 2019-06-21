@@ -36,7 +36,7 @@
 				}
 				this.saveQRData(this.content);
 				uni.navigateTo({
-					url:'/pages/buss-card/setting-qrcode'
+					url:'/pages/buss-card/setting-qrcode?type=text'
 				});
 			},
 		}

@@ -79,7 +79,7 @@
                     "titleNView": {
                         "buttons": [ //原生标题栏按钮配置,
                             {
-                                "text": "分享", //原生标题栏增加分享按钮，点击事件可通过页面的 onNavigationBarButtonTap 函数进行监听
+                                "text": "保存", //原生标题栏增加保存按钮，点击事件可通过页面的 onNavigationBarButtonTap 函数进行监听
 								"fontSize":"18px",
 								"color":"#000000",
 								"width":"50px"
@@ -102,7 +102,26 @@
 				"navigationBarTitleText": "扫描"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/scandetail/scandetail",
+            "style" : {
+				"app-plus": {
+                    "bounce": "none", //关闭窗口回弹效果
+                    "titleNView": {
+						"titleText":"详情页",
+                        "buttons": [ //原生标题栏按钮配置,
+                            {
+                                "text": "保存", //原生标题栏增加保存按钮，点击事件可通过页面的 onNavigationBarButtonTap 函数进行监听
+								"fontSize":"18px",
+								"color":"#000000",
+								"width":"50px"
+                            }
+                        ]
+                    }
+                }
+			}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#FFFFFF",

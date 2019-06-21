@@ -37,7 +37,7 @@
 				const qrStr = qrcode.url(this.content);
 				this.saveQRData(qrStr);
 				uni.navigateTo({
-					url:'/pages/buss-card/setting-qrcode'
+					url:'/pages/buss-card/setting-qrcode?type=url'
 				});
 			},
 		}

@@ -35,7 +35,7 @@
 				const qrStr = qrcode.message(this.phone,this.content);
 				this.saveQRData(qrStr);				
 				uni.navigateTo({
-					url:'/pages/buss-card/setting-qrcode'
+					url:'/pages/buss-card/setting-qrcode?type=message'
 				});
 			},
 			bindTextAreaPhone: function (e) {

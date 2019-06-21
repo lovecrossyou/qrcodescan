@@ -2,13 +2,13 @@
 	<view class="main">
 		<view class="person-list">
 			<cmd-cell-item title="推荐给朋友" slot-left arrow>
-				<cmd-icon type="settings" size="24" color="#368dff"></cmd-icon>
+				<image class="item-icon" src="/static/more/more_icon_recommend@2x.png" mode=""></image>
 			</cmd-cell-item>
 			<cmd-cell-item title="评价APP" slot-left arrow @click="goabout">
-				<cmd-icon type="credit-card" size="24" color="#368dff"></cmd-icon>
+				<image class="item-icon" src="/static/more/more_icon_like@2x.png" mode=""></image>
 			</cmd-cell-item>
-			<cmd-cell-item title="清除缓存" addon="v1.0" slot-left arrow>
-				<cmd-icon type="alert-circle" size="24" color="#368dff"></cmd-icon>
+			<cmd-cell-item title="清除缓存" addon="0.00M" slot-left arrow>
+				<image class="item-icon" src="/static/more/more_icon_clear_cache@2x.png" mode=""></image>
 			</cmd-cell-item>
 		</view>
 	</view>
@@ -72,6 +72,11 @@
 		justify-content: center;
 		align-items: flex-start;
 		margin-left: 10px;
+	}
+	
+	.item-icon{
+		width: 34upx;
+		height: 34upx;
 	}
 
 	.person-head-nickname {

@@ -141,5 +141,7 @@ export default {
 	genScanHistory,
 	loadGenHistory,
 	delGenHistory,
-	clearAll
+	clearAll,
+	SCAN_HISTORY,
+	GEN_HISTORY
 }
