@@ -92,7 +92,7 @@
 				"navigationBarTitleText": "扫描历史",
 				"navigationStyle": "custom",
 				"app-plus": {
-					"titleNView":"false"
+					"titleNView":false
 				}
 			}
 		}, {

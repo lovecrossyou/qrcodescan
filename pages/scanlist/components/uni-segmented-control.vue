@@ -118,7 +118,7 @@
 	.segmented-control-item {
 		flex: 1;
 		text-align: center;
-		line-height: 50upx;
+		line-height: 60upx;
 		box-sizing: border-box;
 	}
 

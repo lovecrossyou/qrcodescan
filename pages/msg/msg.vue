@@ -5,7 +5,7 @@
 		</view>
 
 		<view class="input-item-h">
-			<textarea v-model="content" class="uni-input" type="text" placeholder="短信内容" />
+			<textarea v-model="content" class="uni-input" type="text" placeholder="短信内容"></textarea>
 		</view>
 
 		<view class="footer-btn" @click="fnModify">
@@ -33,17 +33,17 @@
 		methods: {
 			...mapMutations(['saveQRData']),
 			fnModify() {
-				if(this.phone.length ===0){
+				if (this.phone.length === 0) {
 					uni.showToast({
 						title: '请输入手机号码',
-						icon:"none"
+						icon: "none"
 					});
 					return;
 				}
-				if(this.content.length ===0){
+				if (this.content.length === 0) {
 					uni.showToast({
 						title: '请输入文本内容',
-						icon:"none"
+						icon: "none"
 					});
 					return;
 				}
