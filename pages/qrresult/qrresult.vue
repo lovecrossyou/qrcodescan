@@ -14,10 +14,11 @@
 	import {
         mapState
     } from 'vuex'
+	import service from'../../service.js'
 	export default {
 		data() {
 			return {
-				
+				scanType:''
 			}
 		},
 		computed:{
@@ -29,11 +30,24 @@
 					data: this.qrcode,
 					success: function() {
 						uni.showToast({
-							title:"复制成功"
+							title:"复制成功",
+							icon:"none"
 						})
 					}
 				});
 			}
+		},
+		onLoad(opt) {
+			if(opt.type){
+				this.scanType = opt.type;
+			}
+		},
+		onNavigationBarButtonTap(){
+			service.addScanHistory(this.qrcode, this.scanType);
+			uni.showToast({
+				title: '保存成功',
+				icon:"none"
+			});
 		}
 	}
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="qrimg">
-			<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="foregroundColor" :foreground="backgroundColor" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
+			<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="backgroundColor" :foreground="foregroundColor" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
 			 :loadMake="loadMake" :usingComponents="true" @result="qrR" />
 		</view>
 		<view class="uni-padding-wrap uni-common-mt">
@@ -14,7 +14,7 @@
 			<view class="btns">
 				<view class="primary" @tap="toggleForegroundPopup('bottom')">前景色</view>
 				<view class="primary" @tap="selectIcon">选择二维码图标</view>
-				<view class="primary" @tap="toggleBgPopup('bottom',2)">背景色</view>
+				<view class="primary" @tap="toggleBgPopup('bottom')">背景色</view>
 				<view class="primary_bule" @tap="saveQrcode">保存到手机</view>
 				<view class="primary" @tap="shareQrcode">分享给好友</view>
 			</view>

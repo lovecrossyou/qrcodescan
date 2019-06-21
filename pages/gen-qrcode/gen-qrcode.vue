@@ -21,7 +21,7 @@
 				</view>
 			</view>
 			<view class="footer_item" @click="goMore">
-				<image src="/static/tab/tabar_icon_history@2x.png" class="footer_item_icon">
+				<image src="/static/tab/tabar_icon_more@2x.png" class="footer_item_icon">
 				</image>
 				<view class="footer_item_title">
 					更多
@@ -68,9 +68,8 @@
 						that.result = res.result;
 						that.saveQRData(res.result)
 						uni.navigateTo({
-							url: "/pages/qrresult/qrresult"
+							url: "/pages/qrresult/qrresult?type="+this.scanType
 						});
-						service.addScanHistory(res.result, this.scanType);
 						//刷新历史列表
 						this.loadScanList();
 					}

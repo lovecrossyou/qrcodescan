@@ -54,6 +54,9 @@
 		methods: {
 			changeType(index,type){
 				this.activeIndex=index;
+				if(type==='WPA/WPA2'){
+					type = 'WPA';
+				}
 				this.wifi.type = type;
 			},
 			...mapMutations(['saveQRData']),
