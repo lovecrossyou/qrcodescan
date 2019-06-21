@@ -1,6 +1,6 @@
 <template>
 	<view class="wrapper">
-		<uni-nav-bar right-text="清空" @click-right="clearAll">
+		<uni-nav-bar leftIcon="back" right-text="清空" @click-right="clearAll" @click-left="goBack">
 			<view class="segmented_control_area">
 				<uni-segmented-control :current="current" :values="items" @clickItem="onClickItem" style-type="button" active-color="#4A4A4A"></uni-segmented-control>
 			</view>
@@ -28,22 +28,22 @@
 		<view class="content">
 			<block v-for="(item,index) in genList" :key="item.id">
 				<view v-show="current === 0" class="content_main_content">
-					<image :src="item.qrCodeImg" class="qr_code_img" @click.stop="goDetail(item)"></image>
-					<view class="center_content" @tap="goDetail(item)">
+					<image :src="item.qrCodeImg" class="qr_code_img" @tap.stop="goDetail(item)"></image>
+					<view class="center_content" @tap.stop="goDetail(item)">
 						<view class="code_name">{{item.codeName}}</view>
 						<view class="code_time">{{item.codeTime}}</view>
 					</view>
-					<image @tap="delitem(item.id,index,0)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
+					<image @tap.stop="delitem(item.id,index,0)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
 				</view>
 			</block>
 			<block v-for="(item,index) in scanList" :key="item.id">
 				<view v-show="current === 1" class="content_main_content">
-					<image :src="item.qrCodeImg" class="qr_code_img" @click.stop="goScanResult(item)"></image>
-					<view class="center_content" @click.stop="goScanResult(item)">
+					<image :src="item.qrCodeImg" class="qr_code_img" @tap.stop="goScanResult(item)"></image>
+					<view class="center_content" @tap.stop="goScanResult(item)">
 						<view class="code_name">{{item.codeName}}</view>
 						<view class="code_time">{{item.codeTime}}</view>
 					</view>
-					<image @tap="delitem(item.id,index,1)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
+					<image @tap.stop="delitem(item.id,index,1)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
 				</view>
 			</block>
 		</view>

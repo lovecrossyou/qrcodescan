@@ -71,7 +71,7 @@
 							url: "/pages/qrresult/qrresult?type=" + this.scanType
 						});
 						//刷新历史列表
-						this.loadScanList();
+						// this.loadScanList();
 					}
 				});
 			}
