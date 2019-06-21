@@ -71,10 +71,10 @@
 						that.result = res.result;
 						that.saveQRData(res.result)
 						uni.navigateTo({
-							url: "/pages/qrresult/qrresult?type=" + this.scanType
+							url: "/pages/qrresult/qrresult?type=" + that.scanType
 						});
 						//刷新历史列表
-						// this.loadScanList();
+						this.loadScanList();
 					}
 				});
 			}
