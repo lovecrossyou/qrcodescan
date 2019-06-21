@@ -19,7 +19,7 @@
 				</view>
 			</block>
 			<block v-for="(item,index) in scanList" :key="item.id">
-				<view v-show="current === 1" class="content_main_content"  @click="goDetail(item)">
+				<view v-show="current === 1" class="content_main_content" @click="goDetail(item)">
 					<image :src="item.qrCodeImg" class="qr_code_img"></image>
 					<view class="center_content">
 						<view class="code_name">{{item.codeName}}</view>
@@ -28,6 +28,20 @@
 					<image @click.stop="delitem(item.id,index,1)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
 				</view>
 			</block>
+		</view>
+
+		<view v-if="genList.length==0&current==0" class="empty-wrapper">
+			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
+			<view class="empty-text">
+				暂无记录
+			</view>
+		</view>
+		
+		<view v-if="scanList.length==0&current==1" class="empty-wrapper">
+			<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
+			<view class="empty-text">
+				暂无记录
+			</view>
 		</view>
 	</view>
 </template>
@@ -78,11 +92,11 @@
 					}
 				});
 			},
-			goDetail(item){
+			goDetail(item) {
 				console.log('item ', item);
 				this.saveQRData(item.data)
 				uni.navigateTo({
-					url:"/pages/scandetail/scandetail?type="+item.type
+					url: "/pages/scandetail/scandetail?type=" + item.type
 				})
 			},
 			delitem(id, index, type) {
@@ -111,6 +125,29 @@
 </script>
 
 <style scoped>
+	.empty-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		
+	}
+
+	.empty-text {
+		margin-top: 20upx;
+		color: #C1C1C1;
+		font-size: 32upx;
+	}
+
+	.empty-img {
+		width: 200upx;
+		height: 170upx;
+	}
+
 	.wrapper {
 		width: 100%;
 		background: #F2F2F2;
