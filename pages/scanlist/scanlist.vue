@@ -16,7 +16,7 @@
 			</view>
 
 		</view>
-		<view v-else-if="current==1">
+		<view v-else-if="current===1">
 			<view v-if="scanList.length==0" class="empty-wrapper">
 				<image class="empty-img" src="/static/history_icon_empty_state@2x.png" mode=""></image>
 				<view class="empty-text">
@@ -26,7 +26,7 @@
 		</view>
 
 		<view class="content">
-			<block v-for="(item,index) in genList" :key="item.id">
+			<block v-if="current===0" v-for="(item,index) in genList" :key="item.id">
 				<view v-show="current === 0" class="content_main_content">
 					<image :src="item.qrCodeImg" class="qr_code_img" @tap.stop="goDetail(item)"></image>
 					<view class="center_content" @tap.stop="goDetail(item)">
@@ -36,7 +36,7 @@
 					<image @tap.stop="delitem(item.id,index,0)" src="../../static/scanlist/history_list_delete_icon@2x.png" class="clear_icon"></image>
 				</view>
 			</block>
-			<block v-for="(item,index) in scanList" :key="item.id">
+			<block v-if="current===1" v-for="(item,index) in scanList" :key="item.id">
 				<view v-show="current === 1" class="content_main_content">
 					<image :src="item.qrCodeImg" class="qr_code_img" @tap.stop="goScanResult(item)"></image>
 					<view class="center_content" @tap.stop="goScanResult(item)">
@@ -113,17 +113,18 @@
 				})
 			},
 			delitem(id, index, type) {
+				let that = this;
 				uni.showModal({
 					content: '确定删除本条记录',
 					success: function(res) {
 						if (res.confirm) {
 							if (type === 0) {
 								//生成历史删除
-								this.genList.splice(index, 1);
+								that.genList.splice(index, 1);
 								service.delGenHistory(id);
 							} else {
 								// 扫描删除
-								this.scanList.splice(index, 1);
+								that.scanList.splice(index, 1);
 								service.delScanHistory(id);
 							}
 						}

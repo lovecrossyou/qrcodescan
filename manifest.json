@@ -9,7 +9,8 @@
         /* 5+App特有相关 */
         "usingComponents" : true,
         "modules" : {
-            "SQLite" : {}
+            "SQLite" : {},
+            "Share" : {}
         },
         /* 模块配置 */
         "distribute" : {
@@ -41,9 +42,23 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
-            "ios" : {},
+            "ios" : {
+                "privacyDescription" : {
+                    "NSPhotoLibraryUsageDescription" : "读取相册二维码图片",
+                    "NSPhotoLibraryAddUsageDescription" : "保存二维图片到相册",
+                    "NSCameraUsageDescription" : "二维码扫描"
+                }
+            },
             /* ios打包配置 */
-            "sdkConfigs" : {},
+            "sdkConfigs" : {
+                "payment" : {},
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wxf4fa354dd672d6cb",
+                        "appsecret" : "5829ee86a97b33002c22d89c5c625983"
+                    }
+                }
+            },
             "icons" : {
                 "android" : {
                     "hdpi" : "unpackage/res/icons/72x72.png",
