@@ -18,12 +18,11 @@
 	export default {
 		data() {
 			return {
-				scanType:'',
-				qrcode:"哈哈啊哈哈哈哈啊xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx11哈哈啊哈哈哈哈啊哈哈"
+				scanType:''
 			}
 		},
 		computed:{
-			// ...mapState(['qrcode'])
+			...mapState(['qrcode'])
 		},
 		methods: {
 			copy() {
