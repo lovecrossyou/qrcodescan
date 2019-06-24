@@ -66,9 +66,9 @@
 				const qrStr = qrcode.wifi(this.wifi);
 				this.saveQRData(qrStr);
 					//本地存储
-				service.genScanHistory(qrStr, 'wifi');
-				//刷新历史列表
-				this.loadGenList();
+				// service.genScanHistory(qrStr, 'wifi');
+				// //刷新历史列表
+				// this.loadGenList();
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});

@@ -1,8 +1,10 @@
 <template>
 	<view class="main">
+		<canvas canvas-id="canvas" />
 		<view class="qrimg">
-			<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
-			 :loadMake="loadMake" :usingComponents="true"  />
+			<image :src="qrcode" mode="widthFix"></image>
+			<!-- <tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
+			 :loadMake="loadMake" :usingComponents="true"  /> -->
 		</view>
 	</view>
 </template>
@@ -12,7 +14,7 @@
 		mapState,
 	} from 'vuex';
 	import tkiQrcode from '@/components/tki-qrcode/tki-qrcode.vue';
-	import service from'../../service.js'
+	import service from '../../service.js'
 	export default {
 		data() {
 			return {
@@ -42,12 +44,23 @@
 		},
 		onLoad(opt) {
 			this.scanType = opt.type;
+			const ctx = uni.createCanvasContext('canvas');
+			ctx.drawImage(this.qrcode, 0, 0, 150, 100)
+			ctx.draw();
+			console.log('ctx ', ctx);
 		},
-		onNavigationBarButtonTap(){
-			service.addScanHistory(this.qrcode, this.scanType);
+		onNavigationBarButtonTap() {
+			// service.addScanHistory(this.qrcode, this.scanType);
+			uni.saveFile({
+				tempFilePath: tempFilePaths[0],
+				success: function(res) {
+					var savedFilePath = res.savedFilePath;
+				}
+			});
+
 			uni.showToast({
 				title: '保存成功',
-				icon:"none"
+				icon: "none"
 			});
 		}
 	}

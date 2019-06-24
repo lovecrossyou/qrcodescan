@@ -3,15 +3,15 @@
 		<view class="qr-container">
 			<view class="qrimg" v-bind:style="{backgroundColor:backgroundColor}">
 				<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="backgroundColor" :foreground="foregroundColor"
-				 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval" :loadMake="loadMake"
+				 :pdground="foregroundColor" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval" :loadMake="loadMake"
 				 :usingComponents="true" @result="qrR" />
 			</view>
 		</view>
-		<view class="uni-padding-wrap uni-common-mt">
+		<view class="uni-padding-wrap uni-common-mt setting-text">
 			<view class="uni-title">设置二维码大小</view>
 		</view>
 		<view class="body-view">
-			<slider :value="size" @change="sliderchange" min="50" max="400" show-value />
+			<slider step="20" :value="size" @change="sliderchange" min="100" max="600" show-value />
 		</view>
 		<view class="uni-padding-wrap">
 			<view class="btns">
@@ -48,13 +48,13 @@
 			return {
 				type: '',
 				ifShow: true,
-				size: 200, // 二维码大小
+				size: 100, // 二维码大小
 				unit: 'upx', // 单位
 				// background: '#b4e9e2', // 背景色
 				// foreground: '#309286', // 前景色
 				pdground: '#333333', // 角标色
 				icon: '', // 二维码图标
-				iconsize: 40, // 二维码图标大小
+				// iconsize: 40, // 二维码图标大小
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
 				onval: false, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
@@ -80,10 +80,19 @@
 			},
 			foregroundColor() {
 				return this.bottomData[this.foregroundIndex];
+			},
+			iconsize() {
+				return this.size * 0.1;
 			}
 		},
 		onLoad(option) {
 			this.scanType = option.type;
+		},
+		onUnload() {
+			//本地存储二维码图片
+			service.genScanHistory(this.src, this.scanType);
+			//刷新历史列表
+			this.loadGenList();
 		},
 		methods: {
 			...mapActions(['loadGenList']),
@@ -116,13 +125,10 @@
 			},
 			saveQrcode() {
 				this.$refs.qrcode._saveCode();
-				//本地存储
-				// service.genScanHistory(this.qrcode, this.scanType);
-				//刷新历史列表
-				// this.loadGenList();
+
 			},
 			qrR(res) {
-				this.src = res
+				this.src = res;
 			},
 			clearQrcode() {
 				this.$refs.qrcode._clearCode()
@@ -139,7 +145,6 @@
 				uni.showActionSheet({
 					itemList: ['不使用图标', '从相册选择'],
 					success: function(res) {
-						console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
 						if (res.tapIndex === 1) {
 							uni.chooseImage({
 								count: 1, //默认9
@@ -153,6 +158,11 @@
 									// console.log(res.tempFilePaths);
 								}
 							});
+						} else if (res.tapIndex === 0) {
+							that.icon = '';
+							setTimeout(() => {
+								that.creatQrcode()
+							}, 100);
 						}
 					},
 					fail: function(res) {
@@ -178,9 +188,14 @@
 		overflow-x: hidden;
 	}
 
+	.setting-text {
+		margin-top: 20upx;
+	}
+
 	.qr-container {
-		width: 400upx;
-		height: 400upx;
+		margin-top: 20upx;
+		width: 600upx;
+		height: 600upx;
 
 		display: flex;
 		flex-direction: row;

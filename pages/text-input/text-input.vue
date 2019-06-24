@@ -39,9 +39,9 @@
 				}
 				this.saveQRData(this.content);
 					//本地存储
-				service.genScanHistory(this.content, 'text');
-				//刷新历史列表
-				this.loadGenList();
+				// service.genScanHistory(this.content, 'text');
+				// //刷新历史列表
+				// this.loadGenList();
 				
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode?type=text'

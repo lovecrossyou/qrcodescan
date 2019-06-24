@@ -40,9 +40,9 @@
 				const qrStr = qrcode.phone(this.content);
 				this.saveQRData(qrStr);
 					//本地存储
-				service.genScanHistory(qrStr, 'phone');
-				//刷新历史列表
-				this.loadGenList();
+				// service.genScanHistory(qrStr, 'phone');
+				// //刷新历史列表
+				// this.loadGenList();
 				uni.navigateTo({
 					url: '/pages/buss-card/setting-qrcode?type=phone'
 				});
