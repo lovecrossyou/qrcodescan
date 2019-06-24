@@ -47,9 +47,24 @@ const store = new Vuex.Store({
 		loadGenList({commit}){
 			const rawGenHistory = service.loadGenHistory();
 			const list = rawGenHistory.map(item => {
-				let name = item.name.slice(0, 3);
+				let name = ''
 				if (item.type === 'vcard') {
 					name = "名片"
+				}
+				else if (item.type === 'text') {
+					name = "文本"
+				}
+				else if (item.type === 'url') {
+					name = "网址"
+				}
+				else if (item.type === 'phone') {
+					name = "电话"
+				}
+				else if (item.type === 'msg') {
+					name = "信息"
+				}
+				else if (item.type === 'wifi') {
+					name = "WIFI"
 				}
 				return {
 					id: item.id,

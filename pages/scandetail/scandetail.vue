@@ -20,9 +20,9 @@
 				ifShow: true,
 				size: 644, // 二维码大小
 				unit: 'upx', // 单位
-				background: '#b4e9e2', // 背景色
-				foreground: '#309286', // 前景色
-				pdground: '#32dbc6', // 角标色
+				background: '#FFFFFF', // 背景色
+				foreground: '#000000', // 前景色
+				pdground: '#333333', // 角标色
 				icon: '', // 二维码图标
 				iconsize: 40, // 二维码图标大小
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行

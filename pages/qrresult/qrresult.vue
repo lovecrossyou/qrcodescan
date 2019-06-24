@@ -1,6 +1,6 @@
 <template>
 	<view class="main">
-		<text class="qrimg">
+		<text decode class="qrimg">
 			{{qrcode}}
 		</text>
 
@@ -18,11 +18,12 @@
 	export default {
 		data() {
 			return {
-				scanType:''
+				scanType:'',
+				qrcode:"哈哈啊哈哈哈哈啊xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx11哈哈啊哈哈哈哈啊哈哈"
 			}
 		},
 		computed:{
-			...mapState(['qrcode'])
+			// ...mapState(['qrcode'])
 		},
 		methods: {
 			copy() {
@@ -65,13 +66,15 @@
 	}
 
 	.qrimg {
-		width: 100%;
+		width: 680upx;
 		height: 702upx;
 		background: #FFFFFF;
 		border-radius: 16upx;
-		overflow: visible;
+		overflow-x: inherit;
 		padding: 24upx;
 		box-sizing: border-box;
+		word-wrap: break-word;
+	
 	}
 
 	.item {

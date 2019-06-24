@@ -1,14 +1,17 @@
 <template>
 	<view class="container">
-		<view class="qrimg">
-			<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="backgroundColor" :foreground="foregroundColor" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
-			 :loadMake="loadMake" :usingComponents="true" @result="qrR" />
+		<view class="qr-container">
+			<view class="qrimg" v-bind:style="{backgroundColor:backgroundColor}">
+				<tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :background="backgroundColor" :foreground="foregroundColor"
+				 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval" :loadMake="loadMake"
+				 :usingComponents="true" @result="qrR" />
+			</view>
 		</view>
 		<view class="uni-padding-wrap uni-common-mt">
 			<view class="uni-title">设置二维码大小</view>
 		</view>
 		<view class="body-view">
-			<slider :value="size" @change="sliderchange" min="50" max="500" show-value />
+			<slider :value="size" @change="sliderchange" min="50" max="400" show-value />
 		</view>
 		<view class="uni-padding-wrap">
 			<view class="btns">
@@ -36,10 +39,10 @@
 	import tkiQrcode from '@/components/tki-qrcode/tki-qrcode.vue';
 	import uniPopup from "@/components/uni-popup/uni-popup.vue";
 	import {
-        mapState,
+		mapState,
 		mapActions
-    } from 'vuex';
-	import service from'../../service.js'
+	} from 'vuex';
+	import service from '../../service.js'
 	export default {
 		data() {
 			return {
@@ -49,7 +52,7 @@
 				unit: 'upx', // 单位
 				// background: '#b4e9e2', // 背景色
 				// foreground: '#309286', // 前景色
-				pdground: '#32dbc6', // 角标色
+				pdground: '#333333', // 角标色
 				icon: '', // 二维码图标
 				iconsize: 40, // 二维码图标大小
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
@@ -57,14 +60,14 @@
 				loadMake: true, // 组件加载完成后自动生成二维码
 				src: '', // 二维码生成后的图片地址或base64
 				bottomData: [
-					'#b4e9e2', '#309286', '#F600FF', '#2000FF', '#55FFFF',
+					'#000000', '#FFFFFF', '#F600FF', '#2000FF', '#55FFFF',
 					'#F5999D', '#81CA9D', '#FBDF26', '#6CCFF7', '#3CAEEF',
 					'#EE105A', '#31A650', '#8FC63D', '#F40103', '#F7941E'
 				],
 				changeType: 1,
-				backgroundIndex: 0,
-				foregroundIndex: 1,
-				scanType:'',
+				backgroundIndex: 1,
+				foregroundIndex: 0,
+				scanType: '',
 			}
 		},
 		computed: {
@@ -94,11 +97,11 @@
 					this.creatQrcode()
 				}, 100);
 			},
-			toggleForegroundPopup(){
+			toggleForegroundPopup() {
 				this.type = "bottom";
 				this.changeType = 1;
 			},
-			toggleBgPopup(){
+			toggleBgPopup() {
 				this.type = "bottom";
 				this.changeType = 2;
 			},
@@ -114,9 +117,9 @@
 			saveQrcode() {
 				this.$refs.qrcode._saveCode();
 				//本地存储
-				service.genScanHistory(this.qrcode,this.scanType);
+				// service.genScanHistory(this.qrcode, this.scanType);
 				//刷新历史列表
-				this.loadGenList();
+				// this.loadGenList();
 			},
 			qrR(res) {
 				this.src = res
@@ -132,17 +135,28 @@
 
 			},
 			selectIcon() {
-				let that = this
-				uni.chooseImage({
-					count: 1, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+				let that = this;
+				uni.showActionSheet({
+					itemList: ['不使用图标', '从相册选择'],
 					success: function(res) {
-						that.icon = res.tempFilePaths[0]
-						setTimeout(() => {
-							that.creatQrcode()
-						}, 100);
-						// console.log(res.tempFilePaths);
+						console.log('选中了第' + (res.tapIndex + 1) + '个按钮');
+						if (res.tapIndex === 1) {
+							uni.chooseImage({
+								count: 1, //默认9
+								sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+								sourceType: ['album'], //从相册选择
+								success: function(res) {
+									that.icon = res.tempFilePaths[0]
+									setTimeout(() => {
+										that.creatQrcode()
+									}, 100);
+									// console.log(res.tempFilePaths);
+								}
+							});
+						}
+					},
+					fail: function(res) {
+						console.log(res.errMsg);
 					}
 				});
 			}
@@ -160,12 +174,25 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		align-items: center;
+		overflow-x: hidden;
+	}
+
+	.qr-container {
+		width: 400upx;
+		height: 400upx;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.qrimg {
 		display: flex;
 		justify-content: center;
-		margin-top: 24upx;
+		/* margin-top: 24upx; */
+		padding: 10upx 10upx 0 10upx;
 	}
 
 	.primary {

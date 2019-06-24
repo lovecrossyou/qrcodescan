@@ -13,9 +13,11 @@
 
 <script>
 	import {
-		mapMutations
+		mapMutations,
+		mapActions
 	} from 'vuex'
-		import qrcode from "@/util/qrcode.js"
+	import qrcode from "@/util/qrcode.js"
+	import service from '../../service.js'
 
 	export default {
 		data() {
@@ -26,6 +28,7 @@
 		},
 		methods: {
 			...mapMutations(['saveQRData']),
+			...mapActions(['loadGenList']),
 			fnModify() {
 				if(this.content.length===0){
 					uni.showToast({
@@ -36,6 +39,11 @@
 				}
 				const qrStr = qrcode.url(this.content);
 				this.saveQRData(qrStr);
+				//本地存储
+				service.genScanHistory(qrStr, 'url');
+				//刷新历史列表
+				this.loadGenList();
+				
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode?type=url'
 				});

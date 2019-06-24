@@ -12,10 +12,13 @@
 </template>
 
 <script>
-	import qrcode from "@/util/qrcode.js"
 	import {
-		mapMutations
+		mapMutations,
+		mapActions
 	} from 'vuex'
+	import qrcode from "@/util/qrcode.js"
+	import service from '../../service.js'
+	
 	export default {
 		data() {
 			return {
@@ -25,6 +28,7 @@
 		},
 		methods: {
 			...mapMutations(['saveQRData']),
+			...mapActions(['loadGenList']),
 			fnModify() {
 				if (this.content.length === 0) {
 					uni.showToast({
@@ -34,8 +38,11 @@
 					return;
 				}
 				const qrStr = qrcode.phone(this.content);
-
 				this.saveQRData(qrStr);
+					//本地存储
+				service.genScanHistory(qrStr, 'phone');
+				//刷新历史列表
+				this.loadGenList();
 				uni.navigateTo({
 					url: '/pages/buss-card/setting-qrcode?type=phone'
 				});

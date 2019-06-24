@@ -1,6 +1,6 @@
 <template>
 	<view class="main">
-		<uni-nav-bar right-icon="scan" title="二维码生成器" @click-right="clickScan"></uni-nav-bar>
+		<uni-nav-bar right-icon="scan" title="专属二维码" @click-right="clickScan"></uni-nav-bar>
 		<view class="manage_wrapper">
 			<operationItem page="/pages/buss-card/buss-card" describeIcon="/static/gen-qrcode/home_icon_business_card@2x.png"
 			 describeText='名片'></operationItem>
@@ -38,6 +38,7 @@
 		mapMutations,
 		mapActions
 	} from 'vuex'
+	import service from '../../service.js'
 
 	export default {
 		data() {
@@ -73,6 +74,8 @@
 						uni.navigateTo({
 							url: "/pages/qrresult/qrresult?type=" + that.scanType
 						});
+						//本地存储
+						service.genScanHistory(res.result, 'scan');
 						//刷新历史列表
 						this.loadScanList();
 					}

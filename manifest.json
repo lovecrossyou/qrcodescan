@@ -1,7 +1,7 @@
 {
-    "name" : "二维码扫描",
+    "name" : "专属二维码",
     "appid" : "__UNI__1E9A940",
-    "description" : "二维码扫描",
+    "description" : "专属二维码",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,

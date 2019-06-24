@@ -34,9 +34,11 @@
 
 <script>
 	import {
-        mapMutations
-    } from 'vuex'
-		import qrcode from "@/util/qrcode.js"
+		mapMutations,
+		mapActions
+	} from 'vuex'
+	import qrcode from "@/util/qrcode.js"
+	import service from '../../service.js'
 
 	export default {
 		data() {
@@ -51,6 +53,8 @@
 			}
 		},
 		methods: {
+			...mapMutations(['saveQRData']),
+			...mapActions(['loadGenList']),
 			changeType(index,type){
 				this.activeIndex=index;
 				if(type==='WPA/WPA2'){
@@ -58,10 +62,13 @@
 				}
 				this.wifi.type = type;
 			},
-			...mapMutations(['saveQRData']),
 			fnModify() {
 				const qrStr = qrcode.wifi(this.wifi);
 				this.saveQRData(qrStr);
+					//本地存储
+				service.genScanHistory(qrStr, 'wifi');
+				//刷新历史列表
+				this.loadGenList();
 				uni.navigateTo({
 					url:'/pages/buss-card/setting-qrcode'
 				});

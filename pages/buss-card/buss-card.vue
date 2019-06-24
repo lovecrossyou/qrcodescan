@@ -39,10 +39,12 @@
 	import cmdTransition from "@/components/cmd-transition/cmd-transition.vue"
 	import cmdInput from "@/components/cmd-input/cmd-input.vue"
 	import {
-		mapMutations
+		mapMutations,
+		mapActions
 	} from 'vuex';
 
-	import qrcode from "@/util/qrcode.js"
+	import qrcode from "@/util/qrcode.js";
+	import service from '../../service.js'
 	export default {
 		components: {
 			cmdNavBar,
@@ -74,54 +76,34 @@
 
 		methods: {
 			...mapMutations(['saveQRData']),
+			...mapActions(['loadGenList']),
 			/**
 			 * 提交按钮点击执行
 			 */
 			fnModify() {
 				if(this.vcard.name.length==0){
 					uni.showToast({
-						title: '请输入名字',
+						title: '请输入姓名',
 						icon:'none'
 					});
 					return;
 				}
 				if(this.vcard.phone.length==0){
 					uni.showToast({
-						title: '请输入名字',
+						title: '请输入联系电话',
 						icon:'none'
 					});
 					return;
 				}
-				if(this.vcard.addr.length==0){
-					uni.showToast({
-						title: '请输入联系地址',
-						icon:'none'
-					});
-					return;
-				}
-				if(this.vcard.company.length==0){
-					uni.showToast({
-						title: '请输入公司名称',
-						icon:'none'
-					});
-					return;
-				}
-				if(this.vcard.work.length==0){
-					uni.showToast({
-						title: '请输入职位',
-						icon:'none'
-					});
-					return;
-				}
-				if(this.vcard.email.length==0){
-					uni.showToast({
-						title: '请输入邮件地址',
-						icon:'none'
-					});
-					return;
-				}
+				
 				const qrStr = qrcode.vcard(this.vcard);
 				this.saveQRData(qrStr);
+				
+				//本地存储
+				service.genScanHistory(qrStr, 'vcard');
+				//刷新历史列表
+				this.loadGenList();
+				
 				uni.navigateTo({
 					url: '/pages/buss-card/setting-qrcode?type=vcard'
 				});
