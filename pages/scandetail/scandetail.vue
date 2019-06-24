@@ -1,6 +1,6 @@
 <template>
 	<view class="main">
-		<canvas canvas-id="canvas" />
+		<canvas canvas-id="canvas" :style="{width:imageSize.width+'px',height:imageSize.height+'px'}"/>
 	</view>
 </template>
 
@@ -56,8 +56,8 @@
 				canvasId: 'canvas',
 				success: function(res) {
 					console.log(res.tempFilePath);
-					uni.saveFile({
-						tempFilePath: res.tempFilePaths,
+					uni.saveImageToPhotosAlbum({
+						filePath: res.tempFilePath,
 						success: function(res) {
 							uni.showToast({
 								title: '保存成功',
@@ -79,6 +79,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-top: 40upx;
 	}
 
 	.qrimg {

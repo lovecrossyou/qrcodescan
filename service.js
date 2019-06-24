@@ -18,7 +18,6 @@ const addToken = function(token) {
 	uni.setStorageSync(TOKEN_KEY, token);
 }
 
-
 const getInfo = function() {
 	let ret = '';
 	ret = uni.getStorageSync(INFO_KEY);
@@ -53,8 +52,7 @@ const addScanHistory = (data, type) => {
 	list.push(storeData);
 	uni.setStorageSync(SCAN_HISTORY, JSON.stringify(list));
 }
-
-// 获取扫描历史数据
+// 加载扫描历史数据
 const loadScanHistory = (data, type) => {
 	let list = [];
 	const ret = uni.getStorageSync(SCAN_HISTORY);
@@ -63,7 +61,7 @@ const loadScanHistory = (data, type) => {
 	}
 	return list;
 }
-
+// 删除扫描
 const delScanHistory = id => {
 	let list = [];
 	const ret = uni.getStorageSync(SCAN_HISTORY);
@@ -79,6 +77,8 @@ const delScanHistory = id => {
 	list.splice(targetIndex, 1);
 	uni.setStorageSync(SCAN_HISTORY, JSON.stringify(list));
 }
+
+
 
 // 生成历史数据
 const genScanHistory = (data,type) => {

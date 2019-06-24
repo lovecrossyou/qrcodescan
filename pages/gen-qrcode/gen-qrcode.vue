@@ -75,7 +75,7 @@
 							url: "/pages/qrresult/qrresult?type=" + that.scanType
 						});
 						//本地存储
-						service.genScanHistory(res.result, 'scan');
+						service.addScanHistory(res.result, 'scan');
 						//刷新历史列表
 						this.loadScanList();
 					}

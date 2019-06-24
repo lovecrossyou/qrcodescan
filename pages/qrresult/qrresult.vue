@@ -69,11 +69,11 @@
 		height: 702upx;
 		background: #FFFFFF;
 		border-radius: 16upx;
-		overflow-x: inherit;
+		overflow: scroll;
 		padding: 24upx;
 		box-sizing: border-box;
 		word-wrap: break-word;
-	
+		
 	}
 
 	.item {
