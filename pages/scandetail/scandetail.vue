@@ -1,11 +1,6 @@
 <template>
 	<view class="main">
 		<canvas canvas-id="canvas" />
-		<view class="qrimg">
-			<image :src="qrcode" mode="widthFix"></image>
-			<!-- <tki-qrcode ref="qrcode" :val="qrcode" :size="size" :unit="unit" :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :onval="onval"
-			 :loadMake="loadMake" :usingComponents="true"  /> -->
-		</view>
 	</view>
 </template>
 
@@ -30,7 +25,11 @@
 				lv: 3, // 二维码容错级别 ， 一般不用设置，默认就行
 				onval: false, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
-				src: '', // 二维码生成后的图片地址或base64
+				src: '', // 二维码生成后的图片地址或base64,
+				imageSize: {
+					width: 340,
+					height: 340
+				}
 			}
 		},
 		computed: {
@@ -44,24 +43,32 @@
 		},
 		onLoad(opt) {
 			this.scanType = opt.type;
+			const sysInfo = uni.getSystemInfoSync();
+			console.log('sysInfo', sysInfo);
+			const pixelRatio = sysInfo.pixelRatio;
 			const ctx = uni.createCanvasContext('canvas');
-			ctx.drawImage(this.qrcode, 0, 0, 150, 100)
+			ctx.drawImage(this.qrcode,0,0, this.imageSize.width, this.imageSize
+				.height)
 			ctx.draw();
-			console.log('ctx ', ctx);
 		},
 		onNavigationBarButtonTap() {
-			// service.addScanHistory(this.qrcode, this.scanType);
-			uni.saveFile({
-				tempFilePath: tempFilePaths[0],
+			uni.canvasToTempFilePath({
+				canvasId: 'canvas',
 				success: function(res) {
-					var savedFilePath = res.savedFilePath;
-				}
-			});
+					console.log(res.tempFilePath);
+					uni.saveFile({
+						tempFilePath: res.tempFilePaths,
+						success: function(res) {
+							uni.showToast({
+								title: '保存成功',
+								icon: "none"
+							});
+						}
+					});
 
-			uni.showToast({
-				title: '保存成功',
-				icon: "none"
-			});
+				}
+			})
+
 		}
 	}
 </script>
