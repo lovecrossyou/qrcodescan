@@ -48,7 +48,7 @@
 			return {
 				type: '',
 				ifShow: true,
-				size: 100, // 二维码大小
+				size: 350, // 二维码大小
 				unit: 'upx', // 单位
 				// background: '#b4e9e2', // 背景色
 				// foreground: '#309286', // 前景色
@@ -186,6 +186,8 @@
 		width: 100%;
 		align-items: center;
 		overflow-x: hidden;
+		overflow-y: scroll;
+		padding-bottom: 40upx;
 	}
 
 	.setting-text {
