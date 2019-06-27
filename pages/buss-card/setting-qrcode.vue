@@ -7,22 +7,19 @@
 				 :usingComponents="true" @result="qrR" />
 			</view>
 		</view>
-		<view class="uni-padding-wrap uni-common-mt setting-text">
+		<view class="setting-text">
 			<view class="uni-title">设置二维码大小</view>
 		</view>
-		<view class="body-view">
+		<view class="slider-wrapper">
 			<slider step="20" :value="size" @change="sliderchange" min="100" max="600" show-value />
 		</view>
-		<view class="uni-padding-wrap">
-			<view class="btns">
-				<view class="primary" @tap="toggleForegroundPopup('bottom')">前景色</view>
-				<view class="primary" @tap="selectIcon">选择二维码图标</view>
-				<view class="primary" @tap="toggleBgPopup('bottom')">背景色</view>
-				<view class="primary_bule" @tap="saveQrcode">保存到手机</view>
-				<view class="primary" @tap="shareQrcode">分享给好友</view>
-			</view>
+		<view class="btns">
+			<view class="primary" @tap="toggleForegroundPopup('bottom')">前景色</view>
+			<view class="primary" @tap="selectIcon">选择二维码图标</view>
+			<view class="primary" @tap="toggleBgPopup('bottom')">背景色</view>
+			<view class="primary_bule" @tap="saveQrcode">保存到手机</view>
+			<view class="primary" @tap="shareQrcode">分享给好友</view>
 		</view>
-
 		<uni-popup :show="type === 'bottom'" position="bottom" @hidePopup="togglePopup('')">
 			<view class="bottom-title">{{bottom_title}}</view>
 			<view class="bottom-content">
@@ -185,9 +182,8 @@
 		flex-direction: column;
 		width: 100%;
 		align-items: center;
-		overflow-x: hidden;
-		overflow-y: scroll;
-		padding-bottom: 40upx;
+		padding-bottom: 240upx;
+		box-sizing: border-box;
 	}
 
 	.setting-text {
@@ -208,8 +204,8 @@
 	.qrimg {
 		display: flex;
 		justify-content: center;
-		/* margin-top: 24upx; */
 		padding: 10upx 10upx 0 10upx;
+		box-sizing: border-box;
 	}
 
 	.primary {
@@ -263,9 +259,10 @@
 	.uni-title {
 		padding: 0 24upx;
 		font-size: 28upx;
+		box-sizing: border-box;
 	}
 
-	.body-view {
+	.slider-wrapper {
 		padding: 0 24upx;
 		box-sizing: border-box;
 		width: 702upx;
@@ -294,5 +291,6 @@
 		flex-wrap: wrap;
 		padding: 0 60upx;
 		height: 476upx;
+		box-sizing: border-box;
 	}
 </style>

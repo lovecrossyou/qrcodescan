@@ -6,7 +6,8 @@
 				"navigationBarTitleText": "二维码生成器",
 				"navigationStyle": "custom",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": false,
+					"UIStatusBarStyle":"UIStatusBarStyleBlackOpaque"
 				}
 			}
 		},
