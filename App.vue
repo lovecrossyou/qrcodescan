@@ -17,7 +17,6 @@
 	/* uni-app默认全局使用flex布局。因为flex布局有利于跨更多平台，尤其是采用原生渲染的平台。如不了解flex布局，请参考http://www.w3.org/TR/css3-flexbox/。如不使用flex布局，请删除或注释掉本行。*/
 	page{
 		height: 100%;
-		overflow: hidden;
 		width: 100%;
 	}
 </style>
